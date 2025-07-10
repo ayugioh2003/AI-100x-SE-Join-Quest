@@ -1,5 +1,902 @@
 [
   {
+    "description": "  As a shopper during Double Eleven promotion\n  I want to receive bulk purchase discounts for the same product\n  So that I can save money when buying in large quantities",
+    "elements": [
+      {
+        "description": "",
+        "id": "double-eleven-bulk-purchase-discount;buy-12-units-of-the-same-product-with-bulk-discount",
+        "keyword": "Scenario",
+        "line": 10,
+        "name": "Buy 12 units of the same product with bulk discount",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "the Double Eleven promotion is active",
+            "match": {
+              "location": "features/step-definitions/double-eleven.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 364375
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity",
+                      "unitPrice"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "襪子",
+                      "12",
+                      "100"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 11,
+            "name": "a customer places an order with:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 217167
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "originalAmount",
+                      "discount",
+                      "totalAmount"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "1200",
+                      "200",
+                      "1000"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "the order summary should be:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 330958
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "襪子",
+                      "12"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 17,
+            "name": "the customer should receive:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:58"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83209
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@double_eleven",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "double-eleven-bulk-purchase-discount;buy-27-units-of-the-same-product-with-multiple-bulk-discounts",
+        "keyword": "Scenario",
+        "line": 21,
+        "name": "Buy 27 units of the same product with multiple bulk discounts",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "the Double Eleven promotion is active",
+            "match": {
+              "location": "features/step-definitions/double-eleven.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 20459
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity",
+                      "unitPrice"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "襪子",
+                      "27",
+                      "100"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 22,
+            "name": "a customer places an order with:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25207
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "originalAmount",
+                      "discount",
+                      "totalAmount"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "2700",
+                      "400",
+                      "2300"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "the order summary should be:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 40375
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "襪子",
+                      "27"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 28,
+            "name": "the customer should receive:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:58"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 100542
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@double_eleven",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "double-eleven-bulk-purchase-discount;buy-10-different-products-without-bulk-discount",
+        "keyword": "Scenario",
+        "line": 32,
+        "name": "Buy 10 different products without bulk discount",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "the Double Eleven promotion is active",
+            "match": {
+              "location": "features/step-definitions/double-eleven.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 83959
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity",
+                      "unitPrice"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品A",
+                      "1",
+                      "100"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品B",
+                      "1",
+                      "100"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品C",
+                      "1",
+                      "100"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品D",
+                      "1",
+                      "100"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品E",
+                      "1",
+                      "100"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品F",
+                      "1",
+                      "100"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品G",
+                      "1",
+                      "100"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品H",
+                      "1",
+                      "100"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品I",
+                      "1",
+                      "100"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品J",
+                      "1",
+                      "100"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 33,
+            "name": "a customer places an order with:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 45749
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "originalAmount",
+                      "discount",
+                      "totalAmount"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "1000",
+                      "0",
+                      "1000"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 45,
+            "name": "the order summary should be:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 101083
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品A",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品B",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品C",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品D",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品E",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品F",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品G",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品H",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品I",
+                      "1"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "商品J",
+                      "1"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 48,
+            "name": "the customer should receive:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:58"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 143083
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@double_eleven",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "double-eleven-bulk-purchase-discount;multiple-products-with-different-bulk-discount-applications",
+        "keyword": "Scenario",
+        "line": 61,
+        "name": "Multiple products with different bulk discount applications",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "the Double Eleven promotion is active",
+            "match": {
+              "location": "features/step-definitions/double-eleven.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 16583
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity",
+                      "unitPrice"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "T-shirt",
+                      "15",
+                      "200"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "褲子",
+                      "8",
+                      "300"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "帽子",
+                      "20",
+                      "50"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 62,
+            "name": "a customer places an order with:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 23084
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "originalAmount",
+                      "discount",
+                      "totalAmount"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "6400",
+                      "600",
+                      "5800"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 67,
+            "name": "the order summary should be:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 29542
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "T-shirt",
+                      "15"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "褲子",
+                      "8"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "帽子",
+                      "20"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 70,
+            "name": "the customer should receive:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:58"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 140374
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@double_eleven",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "double-eleven-bulk-purchase-discount;exactly-10-units-of-a-product-gets-bulk-discount",
+        "keyword": "Scenario",
+        "line": 76,
+        "name": "Exactly 10 units of a product gets bulk discount",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "the Double Eleven promotion is active",
+            "match": {
+              "location": "features/step-definitions/double-eleven.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15374
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity",
+                      "unitPrice"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "手套",
+                      "10",
+                      "150"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 77,
+            "name": "a customer places an order with:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 15167
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "originalAmount",
+                      "discount",
+                      "totalAmount"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "1500",
+                      "300",
+                      "1200"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 80,
+            "name": "the order summary should be:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 28583
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "手套",
+                      "10"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 83,
+            "name": "the customer should receive:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:58"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 25332
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@double_eleven",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "double-eleven-bulk-purchase-discount;less-than-10-units-of-a-product-no-bulk-discount",
+        "keyword": "Scenario",
+        "line": 87,
+        "name": "Less than 10 units of a product no bulk discount",
+        "steps": [
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 8,
+            "name": "the Double Eleven promotion is active",
+            "match": {
+              "location": "features/step-definitions/double-eleven.steps.ts:5"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11666
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity",
+                      "unitPrice"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "圍巾",
+                      "9",
+                      "250"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "When ",
+            "line": 88,
+            "name": "a customer places an order with:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:36"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 14209
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "originalAmount",
+                      "discount",
+                      "totalAmount"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "2250",
+                      "0",
+                      "2250"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "Then ",
+            "line": 91,
+            "name": "the order summary should be:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 26666
+            }
+          },
+          {
+            "arguments": [
+              {
+                "rows": [
+                  {
+                    "cells": [
+                      "productName",
+                      "quantity"
+                    ]
+                  },
+                  {
+                    "cells": [
+                      "圍巾",
+                      "9"
+                    ]
+                  }
+                ]
+              }
+            ],
+            "keyword": "And ",
+            "line": 94,
+            "name": "the customer should receive:",
+            "match": {
+              "location": "features/step-definitions/order.steps.ts:58"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 24167
+            }
+          }
+        ],
+        "tags": [
+          {
+            "name": "@double_eleven",
+            "line": 1
+          }
+        ],
+        "type": "scenario"
+      }
+    ],
+    "id": "double-eleven-bulk-purchase-discount",
+    "line": 2,
+    "keyword": "Feature",
+    "name": "Double Eleven Bulk Purchase Discount",
+    "tags": [
+      {
+        "name": "@double_eleven",
+        "line": 1
+      }
+    ],
+    "uri": "features/double-eleven.feature"
+  },
+  {
     "description": "  As a shopper\n  I want the system to calculate my order total with applicable promotions\n  So that I can understand how much to pay and what items I will receive",
     "elements": [
       {
@@ -15,11 +912,11 @@
             "line": 8,
             "name": "no promotions are applied",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:14"
+              "location": "features/step-definitions/order.steps.ts:8"
             },
             "result": {
               "status": "passed",
-              "duration": 581291
+              "duration": 21583
             }
           },
           {
@@ -47,11 +944,11 @@
             "line": 9,
             "name": "a customer places an order with:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:44"
+              "location": "features/step-definitions/order.steps.ts:36"
             },
             "result": {
               "status": "passed",
-              "duration": 236332
+              "duration": 13541
             }
           },
           {
@@ -75,11 +972,11 @@
             "line": 12,
             "name": "the order summary should be:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:54"
+              "location": "features/step-definitions/order.steps.ts:45"
             },
             "result": {
               "status": "passed",
-              "duration": 329499
+              "duration": 19625
             }
           },
           {
@@ -105,11 +1002,11 @@
             "line": 15,
             "name": "the customer should receive:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:68"
+              "location": "features/step-definitions/order.steps.ts:58"
             },
             "result": {
               "status": "passed",
-              "duration": 118916
+              "duration": 23957
             }
           }
         ],
@@ -151,11 +1048,11 @@
             "line": 20,
             "name": "the threshold discount promotion is configured:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:22"
+              "location": "features/step-definitions/order.steps.ts:16"
             },
             "result": {
               "status": "passed",
-              "duration": 123166
+              "duration": 35832
             }
           },
           {
@@ -190,11 +1087,11 @@
             "line": 23,
             "name": "a customer places an order with:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:44"
+              "location": "features/step-definitions/order.steps.ts:36"
             },
             "result": {
               "status": "passed",
-              "duration": 44292
+              "duration": 14249
             }
           },
           {
@@ -222,11 +1119,11 @@
             "line": 27,
             "name": "the order summary should be:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:54"
+              "location": "features/step-definitions/order.steps.ts:45"
             },
             "result": {
               "status": "passed",
-              "duration": 60124
+              "duration": 26292
             }
           },
           {
@@ -258,11 +1155,11 @@
             "line": 30,
             "name": "the customer should receive:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:68"
+              "location": "features/step-definitions/order.steps.ts:58"
             },
             "result": {
               "status": "passed",
-              "duration": 68666
+              "duration": 38374
             }
           }
         ],
@@ -287,11 +1184,11 @@
             "line": 36,
             "name": "the buy one get one promotion for cosmetics is active",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:35"
+              "location": "features/step-definitions/order.steps.ts:28"
             },
             "result": {
               "status": "passed",
-              "duration": 161415
+              "duration": 20416
             }
           },
           {
@@ -329,11 +1226,11 @@
             "line": 37,
             "name": "a customer places an order with:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:44"
+              "location": "features/step-definitions/order.steps.ts:36"
             },
             "result": {
               "status": "passed",
-              "duration": 117416
+              "duration": 20375
             }
           },
           {
@@ -357,11 +1254,11 @@
             "line": 41,
             "name": "the order summary should be:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:54"
+              "location": "features/step-definitions/order.steps.ts:45"
             },
             "result": {
               "status": "passed",
-              "duration": 44957
+              "duration": 77292
             }
           },
           {
@@ -393,11 +1290,11 @@
             "line": 44,
             "name": "the customer should receive:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:68"
+              "location": "features/step-definitions/order.steps.ts:58"
             },
             "result": {
               "status": "passed",
-              "duration": 118082
+              "duration": 35791
             }
           }
         ],
@@ -422,11 +1319,11 @@
             "line": 50,
             "name": "the buy one get one promotion for cosmetics is active",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:35"
+              "location": "features/step-definitions/order.steps.ts:28"
             },
             "result": {
               "status": "passed",
-              "duration": 26041
+              "duration": 11541
             }
           },
           {
@@ -456,11 +1353,11 @@
             "line": 51,
             "name": "a customer places an order with:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:44"
+              "location": "features/step-definitions/order.steps.ts:36"
             },
             "result": {
               "status": "passed",
-              "duration": 30209
+              "duration": 17583
             }
           },
           {
@@ -484,11 +1381,11 @@
             "line": 54,
             "name": "the order summary should be:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:54"
+              "location": "features/step-definitions/order.steps.ts:45"
             },
             "result": {
               "status": "passed",
-              "duration": 30250
+              "duration": 20416
             }
           },
           {
@@ -514,11 +1411,11 @@
             "line": 57,
             "name": "the customer should receive:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:68"
+              "location": "features/step-definitions/order.steps.ts:58"
             },
             "result": {
               "status": "passed",
-              "duration": 90000
+              "duration": 24374
             }
           }
         ],
@@ -543,11 +1440,11 @@
             "line": 62,
             "name": "the buy one get one promotion for cosmetics is active",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:35"
+              "location": "features/step-definitions/order.steps.ts:28"
             },
             "result": {
               "status": "passed",
-              "duration": 53624
+              "duration": 12624
             }
           },
           {
@@ -585,11 +1482,11 @@
             "line": 63,
             "name": "a customer places an order with:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:44"
+              "location": "features/step-definitions/order.steps.ts:36"
             },
             "result": {
               "status": "passed",
-              "duration": 50083
+              "duration": 13875
             }
           },
           {
@@ -613,11 +1510,11 @@
             "line": 67,
             "name": "the order summary should be:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:54"
+              "location": "features/step-definitions/order.steps.ts:45"
             },
             "result": {
               "status": "passed",
-              "duration": 42957
+              "duration": 17041
             }
           },
           {
@@ -649,11 +1546,11 @@
             "line": 70,
             "name": "the customer should receive:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:68"
+              "location": "features/step-definitions/order.steps.ts:58"
             },
             "result": {
               "status": "passed",
-              "duration": 62374
+              "duration": 36082
             }
           }
         ],
@@ -695,11 +1592,11 @@
             "line": 76,
             "name": "the threshold discount promotion is configured:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:22"
+              "location": "features/step-definitions/order.steps.ts:16"
             },
             "result": {
               "status": "passed",
-              "duration": 30250
+              "duration": 14916
             }
           },
           {
@@ -708,11 +1605,11 @@
             "line": 79,
             "name": "the buy one get one promotion for cosmetics is active",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:35"
+              "location": "features/step-definitions/order.steps.ts:28"
             },
             "result": {
               "status": "passed",
-              "duration": 21625
+              "duration": 17999
             }
           },
           {
@@ -750,11 +1647,11 @@
             "line": 80,
             "name": "a customer places an order with:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:44"
+              "location": "features/step-definitions/order.steps.ts:36"
             },
             "result": {
               "status": "passed",
-              "duration": 32041
+              "duration": 13999
             }
           },
           {
@@ -782,11 +1679,11 @@
             "line": 84,
             "name": "the order summary should be:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:54"
+              "location": "features/step-definitions/order.steps.ts:45"
             },
             "result": {
               "status": "passed",
-              "duration": 42458
+              "duration": 31000
             }
           },
           {
@@ -818,11 +1715,11 @@
             "line": 87,
             "name": "the customer should receive:",
             "match": {
-              "location": "features/step-definitions/order.steps.ts:68"
+              "location": "features/step-definitions/order.steps.ts:58"
             },
             "result": {
               "status": "passed",
-              "duration": 56250
+              "duration": 35874
             }
           }
         ],

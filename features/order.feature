@@ -8,7 +8,7 @@ Feature: E-commerce Order Pricing Promotions
     Given no promotions are applied
     When a customer places an order with:
       | productName | quantity | unitPrice |
-      | T-shirt     | 1        | 500       |
+      | T-shirt     | 1        | 500      |
     Then the order summary should be:
       | totalAmount |
       | 500         |

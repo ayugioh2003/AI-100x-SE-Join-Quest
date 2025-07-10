@@ -6,6 +6,8 @@
   "scripts": {
     "test": "jest",
     "test:cucumber": "cucumber-js",
+    "test:cucumber:verbose": "cucumber-js --format progress --format summary --format json:cucumber-report.json",
+    "test:cucumber:details": "node show-cucumber-report.js",
     "build": "tsc",
     "dev": "ts-node-dev --respawn --transpile-only src/index.ts"
   },

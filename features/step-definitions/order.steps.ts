@@ -3,73 +3,62 @@ import { expect } from 'chai';
 import { OrderService } from '../../src/OrderService';
 import { OrderItem } from '../../src/OrderItem';
 import { Product } from '../../src/Product';
-import { Order } from '../../src/Order';
+import { ICustomWorld } from '../support/world';
 
-let orderService: OrderService;
-let orderItems: OrderItem[];
-let result: Order;
-let thresholdDiscount: { threshold: number; discount: number } | null = null;
-let buyOneGetOneActive: boolean = false;
-
-Given('no promotions are applied', function () {
-  // console.log('Given: no promotions are applied')
-  orderService = new OrderService();
-  orderItems = [];
-  thresholdDiscount = null;
-  buyOneGetOneActive = false;
+Given('no promotions are applied', function (this: ICustomWorld) {
+  this.orderService = new OrderService();
+  this.orderItems = [];
+  this.thresholdDiscount = null;
+  this.buyOneGetOneActive = false;
+  this.doubleElevenActive = false;
 });
 
-Given('the threshold discount promotion is configured:', function (dataTable) {
-  // console.log('Given: the threshold discount promotion is configured:');
+Given('the threshold discount promotion is configured:', function (this: ICustomWorld, dataTable) {
   const config = dataTable.hashes()[0];
-  thresholdDiscount = {
+  this.thresholdDiscount = {
     threshold: parseInt(config.threshold),
     discount: parseInt(config.discount)
   };
-  if (!orderService) {
-    orderService = new OrderService();
+  if (!this.orderService) {
+    this.orderService = new OrderService();
   }
-  orderItems = [];
+  this.orderItems = [];
 });
 
-Given('the buy one get one promotion for cosmetics is active', function () {
-  // console.log('Given: the buy one get one promotion for cosmetics is active');
-  buyOneGetOneActive = true;
-  if (!orderService) {
-    orderService = new OrderService();
+Given('the buy one get one promotion for cosmetics is active', function (this: ICustomWorld) {
+  this.buyOneGetOneActive = true;
+  if (!this.orderService) {
+    this.orderService = new OrderService();
   }
-  orderItems = [];
+  this.orderItems = [];
 });
 
-When('a customer places an order with:', function (dataTable) {
-  // console.log('When: a customer places an order with:');
+When('a customer places an order with:', function (this: ICustomWorld, dataTable) {
   const rows = dataTable.hashes();
-  orderItems = rows.map((row: any) => {
+  this.orderItems = rows.map((row: any) => {
     const product = new Product(row.productName, parseInt(row.unitPrice), row.category || 'default');
     return new OrderItem(product, parseInt(row.quantity));
   });
-  result = orderService.checkout(orderItems, thresholdDiscount, buyOneGetOneActive);
+  this.result = this.orderService.checkout(this.orderItems, this.thresholdDiscount, this.buyOneGetOneActive, this.doubleElevenActive);
 });
 
-Then('the order summary should be:', function (dataTable) {
-  // console.log('Then: the order summary should be:');
+Then('the order summary should be:', function (this: ICustomWorld, dataTable) {
   const expectedData = dataTable.hashes()[0];
   if (expectedData.totalAmount) {
-    expect(result.totalAmount).to.equal(parseInt(expectedData.totalAmount));
+    expect(this.result.totalAmount).to.equal(parseInt(expectedData.totalAmount));
   }
   if (expectedData.originalAmount) {
-    expect(result.originalAmount).to.equal(parseInt(expectedData.originalAmount));
+    expect(this.result.originalAmount).to.equal(parseInt(expectedData.originalAmount));
   }
   if (expectedData.discount) {
-    expect(result.discount).to.equal(parseInt(expectedData.discount));
+    expect(this.result.discount).to.equal(parseInt(expectedData.discount));
   }
 });
 
-Then('the customer should receive:', function (dataTable) {
-  // console.log('Then: the customer should receive:');
+Then('the customer should receive:', function (this: ICustomWorld, dataTable) {
   const expectedItems = dataTable.hashes();
   expectedItems.forEach((expectedItem: any) => {
-    const actualItem = result.items.find(item => item.product.name === expectedItem.productName);
+    const actualItem = this.result.items.find(item => item.product.name === expectedItem.productName);
     expect(actualItem).to.not.be.undefined;
     expect(actualItem!.quantity).to.equal(parseInt(expectedItem.quantity));
   });
