@@ -243,3 +243,17 @@ bin/
 # virtual machine crash logs
 hs_err_pid*
 replay_pid*
+
+# TypeScript
+*.tsbuildinfo
+dist/
+
+# Cucumber reports
+cucumber-report.json
+cucumber-report.html
+
+# Test reports
+*.xml
+
+# Jest
+jest.config.js
