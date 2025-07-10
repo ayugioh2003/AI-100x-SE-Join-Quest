@@ -9,14 +9,17 @@
 
 
 ## Tech Stack
-1. Language Env：Java
-2. BDD Test framework: Cucumber
-3. Native test framework: Junit5
+1. Language Env：TypeScript
+2. BDD Test framework: @cucumber/cucumber (cucumber-js)
+3. Native test framework: Jest
+4. Assertion library: chai
 
 ## Application Environment
 1. App 類型：純模組程式碼
 2. 此 feature file 中的所有優惠邏輯存放至 OrderService 中
 3. Source code root: src/
+4. Test root: features/
+5. Step definitions: features/step-definitions/
 
 # BDD 開發流程
 1. 先建置出 cucumber walking skeleton  - 可順利運行 cucumber 以及至少一個 scenario ，確認至少有一個 test case 被 測試框架執行到。
