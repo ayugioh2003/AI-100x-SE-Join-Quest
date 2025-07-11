@@ -8,7 +8,7 @@ module.exports = {
   verbose: {
     require: ['features/support/**/*.ts', 'features/step-definitions/**/*.ts'],
     requireModule: ['ts-node/register'],
-    format: ['progress', 'summary'],
+    format: ['progress', 'summary', ['html', 'cucumber-report.html']],
     paths: ['features/*.feature'],
   },
 }
