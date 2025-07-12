@@ -1,6 +1,6 @@
 <template>
   <div 
-    class="w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold border-2 shadow-md cursor-pointer select-none"
+    class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border-3 shadow-lg cursor-pointer select-none transform transition-all duration-200 hover:scale-105"
     :class="pieceClasses"
   >
     {{ pieceSymbol }}
@@ -45,12 +45,10 @@ const pieceSymbol = computed(() => {
 })
 
 const pieceClasses = computed(() => {
-  const baseClasses = 'transition-all duration-200 hover:scale-110'
-  
   if (props.piece.color === Color.RED) {
-    return `${baseClasses} bg-red-500 text-white border-red-700`
+    return 'bg-red-600 text-white border-red-800 shadow-red-300'
   } else {
-    return `${baseClasses} bg-gray-800 text-white border-gray-900`
+    return 'bg-gray-900 text-white border-gray-700 shadow-gray-500'
   }
 })
 </script>
