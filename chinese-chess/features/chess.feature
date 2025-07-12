@@ -69,13 +69,13 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   # 4) HORSE (馬/傌)
   #################################################################
-  @Horse @ignore
+  @Horse
   Scenario: Red moves the Horse in an “L” shape with no block (Legal)
     Given the board is empty except for a Red Horse at (3, 3)
     When Red moves the Horse from (3, 3) to (5, 4)
     Then the move is legal
 
-  @Horse @ignore
+  @Horse
   Scenario: Red moves the Horse and it is blocked by an adjacent piece (Illegal)
     Given the board has:
       | Piece        | Position |
@@ -87,13 +87,13 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   # 5) CANNON (炮)
   #################################################################
-  @Cannon @ignore
+  @Cannon
   Scenario: Red moves the Cannon like a Rook with an empty path (Legal)
     Given the board is empty except for a Red Cannon at (6, 2)
     When Red moves the Cannon from (6, 2) to (6, 8)
     Then the move is legal
 
-  @Cannon @ignore
+  @Cannon
   Scenario: Red moves the Cannon and jumps exactly one screen to capture (Legal)
     Given the board has:
       | Piece         | Position |
@@ -103,7 +103,7 @@ Feature: Chinese Chess (象棋) Rules
     When Red moves the Cannon from (6, 2) to (6, 8)
     Then the move is legal
 
-  @Cannon @ignore
+  @Cannon
   Scenario: Red moves the Cannon and tries to jump with zero screens (Illegal)
     Given the board has:
       | Piece         | Position |
@@ -112,7 +112,7 @@ Feature: Chinese Chess (象棋) Rules
     When Red moves the Cannon from (6, 2) to (6, 8)
     Then the move is illegal
 
-  @Cannon @ignore
+  @Cannon
   Scenario: Red moves the Cannon and tries to jump with more than one screen (Illegal)
     Given the board has:
       | Piece         | Position |

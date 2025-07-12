@@ -8,7 +8,7 @@ export class Soldier extends Piece {
     super(color, PieceType.SOLDIER, position);
   }
 
-  isValidMove(board: ChessBoard, from: Position, to: Position): boolean {
+  isValidMove(_board: ChessBoard, _from: Position, _to: Position): boolean {
     // Stub implementation - will be implemented when we get to Soldier scenarios
     return false;
   }

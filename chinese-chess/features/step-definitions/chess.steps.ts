@@ -7,6 +7,8 @@ import { General } from '../../src/models/pieces/General';
 import { Guard } from '../../src/models/pieces/Guard';
 import { Rook } from '../../src/models/pieces/Rook';
 import { Soldier } from '../../src/models/pieces/Soldier';
+import { Horse } from '../../src/models/pieces/Horse';
+import { Cannon } from '../../src/models/pieces/Cannon';
 
 const gameService = new ChessGameService();
 let currentGame: any;
@@ -84,6 +86,18 @@ Given('the board has:', function (dataTable: DataTable) {
     } else if (piece === 'Black Soldier') {
       const blackSoldier = new Soldier(Color.BLACK, position);
       board.setPieceAt(position, blackSoldier);
+    } else if (piece === 'Red Horse') {
+      const redHorse = new Horse(Color.RED, position);
+      board.setPieceAt(position, redHorse);
+    } else if (piece === 'Black Horse') {
+      const blackHorse = new Horse(Color.BLACK, position);
+      board.setPieceAt(position, blackHorse);
+    } else if (piece === 'Red Cannon') {
+      const redCannon = new Cannon(Color.RED, position);
+      board.setPieceAt(position, redCannon);
+    } else if (piece === 'Black Cannon') {
+      const blackCannon = new Cannon(Color.BLACK, position);
+      board.setPieceAt(position, blackCannon);
     }
     // Add other piece types as needed
   }
@@ -110,6 +124,38 @@ Given('the board is empty except for a Red Rook at \\({int}, {int})', function (
 });
 
 When('Red moves the Rook from \\({int}, {int}) to \\({int}, {int})', function (fromRow: number, fromCol: number, toRow: number, toCol: number) {
+  const from = new Position(fromRow, fromCol);
+  const to = new Position(toRow, toCol);
+  moveResult = gameService.makeMove('test-game', from, to);
+});
+
+Given('the board is empty except for a Red Horse at \\({int}, {int})', function (row: number, col: number) {
+  currentGame = gameService.createGame('test-game');
+  const board = currentGame.getBoard();
+  
+  // Place Red Horse at specified position
+  const horsePosition = new Position(row, col);
+  const redHorse = new Horse(Color.RED, horsePosition);
+  board.setPieceAt(horsePosition, redHorse);
+});
+
+When('Red moves the Horse from \\({int}, {int}) to \\({int}, {int})', function (fromRow: number, fromCol: number, toRow: number, toCol: number) {
+  const from = new Position(fromRow, fromCol);
+  const to = new Position(toRow, toCol);
+  moveResult = gameService.makeMove('test-game', from, to);
+});
+
+Given('the board is empty except for a Red Cannon at \\({int}, {int})', function (row: number, col: number) {
+  currentGame = gameService.createGame('test-game');
+  const board = currentGame.getBoard();
+  
+  // Place Red Cannon at specified position
+  const cannonPosition = new Position(row, col);
+  const redCannon = new Cannon(Color.RED, cannonPosition);
+  board.setPieceAt(cannonPosition, redCannon);
+});
+
+When('Red moves the Cannon from \\({int}, {int}) to \\({int}, {int})', function (fromRow: number, fromCol: number, toRow: number, toCol: number) {
   const from = new Position(fromRow, fromCol);
   const to = new Position(toRow, toCol);
   moveResult = gameService.makeMove('test-game', from, to);
