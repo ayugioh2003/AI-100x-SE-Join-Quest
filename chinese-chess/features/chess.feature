@@ -36,13 +36,13 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   # 2) GUARD (士/仕)
   #################################################################
-  @Guard @ignore
+  @Guard
   Scenario: Red moves the Guard diagonally in the palace (Legal)
     Given the board is empty except for a Red Guard at (1, 4)
     When Red moves the Guard from (1, 4) to (2, 5)
     Then the move is legal
 
-  @Guard @ignore
+  @Guard
   Scenario: Red moves the Guard straight (Illegal)
     Given the board is empty except for a Red Guard at (2, 5)
     When Red moves the Guard from (2, 5) to (2, 6)
@@ -51,13 +51,13 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   # 3) ROOK (車)
   #################################################################
-  @Rook @ignore
+  @Rook
   Scenario: Red moves the Rook along a clear rank (Legal)
     Given the board is empty except for a Red Rook at (4, 1)
     When Red moves the Rook from (4, 1) to (4, 9)
     Then the move is legal
 
-  @Rook @ignore
+  @Rook
   Scenario: Red moves the Rook and attempts to jump over a piece (Illegal)
     Given the board has:
       | Piece         | Position |

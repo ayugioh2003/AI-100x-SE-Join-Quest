@@ -4,6 +4,9 @@ import { ChessGameService } from '../../src/ChessGameService';
 import { Position } from '../../src/models/Position';
 import { Color } from '../../src/models/enums';
 import { General } from '../../src/models/pieces/General';
+import { Guard } from '../../src/models/pieces/Guard';
+import { Rook } from '../../src/models/pieces/Rook';
+import { Soldier } from '../../src/models/pieces/Soldier';
 
 const gameService = new ChessGameService();
 let currentGame: any;
@@ -20,6 +23,12 @@ Given('the board is empty except for a Red General at \\({int}, {int})', functio
 });
 
 When('Red moves the General from \\({int}, {int}) to \\({int}, {int})', function (fromRow: number, fromCol: number, toRow: number, toCol: number) {
+  const from = new Position(fromRow, fromCol);
+  const to = new Position(toRow, toCol);
+  moveResult = gameService.makeMove('test-game', from, to);
+});
+
+When('Red moves the Guard from \\({int}, {int}) to \\({int}, {int})', function (fromRow: number, fromCol: number, toRow: number, toCol: number) {
   const from = new Position(fromRow, fromCol);
   const to = new Position(toRow, toCol);
   moveResult = gameService.makeMove('test-game', from, to);
@@ -57,7 +66,51 @@ Given('the board has:', function (dataTable: DataTable) {
     } else if (piece === 'Black General') {
       const blackGeneral = new General(Color.BLACK, position);
       board.setPieceAt(position, blackGeneral);
+    } else if (piece === 'Red Guard') {
+      const redGuard = new Guard(Color.RED, position);
+      board.setPieceAt(position, redGuard);
+    } else if (piece === 'Black Guard') {
+      const blackGuard = new Guard(Color.BLACK, position);
+      board.setPieceAt(position, blackGuard);
+    } else if (piece === 'Red Rook') {
+      const redRook = new Rook(Color.RED, position);
+      board.setPieceAt(position, redRook);
+    } else if (piece === 'Black Rook') {
+      const blackRook = new Rook(Color.BLACK, position);
+      board.setPieceAt(position, blackRook);
+    } else if (piece === 'Red Soldier') {
+      const redSoldier = new Soldier(Color.RED, position);
+      board.setPieceAt(position, redSoldier);
+    } else if (piece === 'Black Soldier') {
+      const blackSoldier = new Soldier(Color.BLACK, position);
+      board.setPieceAt(position, blackSoldier);
     }
     // Add other piece types as needed
   }
+});
+
+Given('the board is empty except for a Red Guard at \\({int}, {int})', function (row: number, col: number) {
+  currentGame = gameService.createGame('test-game');
+  const board = currentGame.getBoard();
+  
+  // Place Red Guard at specified position
+  const guardPosition = new Position(row, col);
+  const redGuard = new Guard(Color.RED, guardPosition);
+  board.setPieceAt(guardPosition, redGuard);
+});
+
+Given('the board is empty except for a Red Rook at \\({int}, {int})', function (row: number, col: number) {
+  currentGame = gameService.createGame('test-game');
+  const board = currentGame.getBoard();
+  
+  // Place Red Rook at specified position
+  const rookPosition = new Position(row, col);
+  const redRook = new Rook(Color.RED, rookPosition);
+  board.setPieceAt(rookPosition, redRook);
+});
+
+When('Red moves the Rook from \\({int}, {int}) to \\({int}, {int})', function (fromRow: number, fromCol: number, toRow: number, toCol: number) {
+  const from = new Position(fromRow, fromCol);
+  const to = new Position(toRow, toCol);
+  moveResult = gameService.makeMove('test-game', from, to);
 });
