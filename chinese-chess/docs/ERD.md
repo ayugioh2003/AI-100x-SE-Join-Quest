@@ -60,6 +60,7 @@ erDiagram
 ## 實體說明
 
 ### GAME (遊戲)
+
 - **gameId**: 遊戲唯一標識
 - **currentPlayer**: 當前回合的玩家顏色 (RED/BLACK)
 - **gameState**: 遊戲狀態 (WAITING/IN_PROGRESS/CHECKMATE/DRAW)
@@ -67,10 +68,12 @@ erDiagram
 - **updatedAt**: 最後更新時間
 
 ### BOARD (棋盤)
+
 - **gameId**: 關聯到遊戲
 - **boardState**: 棋盤狀態的序列化表示
 
 ### PIECE (棋子)
+
 - **pieceId**: 棋子唯一標識
 - **gameId**: 所屬遊戲
 - **type**: 棋子類型 (GENERAL/GUARD/ROOK/HORSE/CANNON/ELEPHANT/SOLDIER)
@@ -80,6 +83,7 @@ erDiagram
 - **captured**: 是否已被吃掉
 
 ### MOVE (移動記錄)
+
 - **moveId**: 移動記錄唯一標識
 - **gameId**: 所屬遊戲
 - **moveNumber**: 第幾步
@@ -90,11 +94,13 @@ erDiagram
 - **timestamp**: 移動時間
 
 ### PLAYER (玩家)
+
 - **playerId**: 玩家唯一標識
 - **playerName**: 玩家名稱
 - **color**: 玩家喜好顏色
 
 ### GAME_PLAYER (遊戲-玩家關聯)
+
 - **gameId**: 遊戲ID
 - **playerId**: 玩家ID
 - **assignedColor**: 在此局遊戲中分配的顏色

@@ -5,7 +5,10 @@
 # Context
 
 ## Design Guideline
-- 參考 entities ERD: @ERD.md 以及 OOD 設計圖：@ClassDiagram.md 。兩張圖中所指示的類別屬性及操作只是基準，你可視情況增加新的類別、屬性或行為。
+- 參考 entities ERD: @ERD.md 以及 OOD 設計圖：@ClassDiagram.md 
+- 兩張圖中所指示的類別屬性及操作只是基準，你可視情況增加新的類別、屬性或行為
+- 優先考慮單一責任原則和開放封閉原則
+- 每個棋子類別都應該封裝自己的移動規則
 
 ## Tech Stack
 1. Language Env：TypeScript

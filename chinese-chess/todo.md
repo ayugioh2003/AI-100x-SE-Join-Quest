@@ -18,13 +18,13 @@
 - [x] 創建 BDD.prompt 提示詞文件
 - [x] 設計 Class Diagram (使用 Mermaid)
 - [x] 設計 Entity Relationship Diagram
-- [ ] 審查並優化設計文件
+- [x] 審查並優化設計文件
 
 #### Day 3-4: Cucumber 環境設置
-- [ ] 初始化 TypeScript 專案
-- [ ] 安裝並配置 Cucumber.js
-- [ ] 設置 Jest 測試環境
-- [ ] 創建 walking skeleton，確保能執行至少一個測試
+- [x] 初始化 TypeScript 專案
+- [x] 安裝並配置 Cucumber.js
+- [x] 設置 Jest 測試環境
+- [x] 創建 walking skeleton，確保能執行至少一個測試
 
 ### 第二階段：BDD 測試實作 (Day 5-14)
 

@@ -18,6 +18,9 @@ classDiagram
         +isGameOver(): boolean
         +getWinner(): Color?
         +switchPlayer(): void
+        +getCurrentPlayer(): Color
+        +getBoard(): ChessBoard
+        +isInCheck(color: Color): boolean
     }
 
     class ChessBoard {
@@ -27,6 +30,9 @@ classDiagram
         +movePiece(from: Position, to: Position): void
         +isPositionValid(position: Position): boolean
         +findGenerals(): Map~Color, Position~
+        +initializeBoard(): void
+        +isEmpty(position: Position): boolean
+        +hasObstaclesBetween(from: Position, to: Position): boolean
     }
 
     class Position {
@@ -147,11 +153,13 @@ classDiagram
 ## 類別說明
 
 ### 核心類別
+
 - **ChessGameService**: 管理多個象棋遊戲實例的服務層
 - **ChessGame**: 代表一局象棋遊戲，管理遊戲狀態和規則
-- **ChessBoard**: 棋盤類別，管理棋子位置
+- **ChessBoard**: 棋盤類別，管理棋子位置和棋盤邏輯
 
 ### 棋子類別
+
 - **Piece**: 抽象基類，定義所有棋子的共同行為
 - **General (將/帥)**: 只能在九宮內移動，不能與對方將帥對面
 - **Guard (士/仕)**: 只能在九宮內斜向移動
@@ -162,11 +170,13 @@ classDiagram
 - **Soldier (兵/卒)**: 過河前只能前進，過河後可橫移
 
 ### 輔助類別
+
 - **Position**: 表示棋盤位置 (row, col)
 - **Move**: 記錄每步棋的詳細信息
 - **MoveResult**: 移動結果，包含是否合法、遊戲是否結束等信息
 
 ### 列舉類型
+
 - **Color**: 紅方或黑方
 - **PieceType**: 棋子類型
 - **GameState**: 遊戲狀態
