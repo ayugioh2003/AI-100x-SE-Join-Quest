@@ -15,12 +15,34 @@ export class ChessGame {
   }
 
   makeMove(from: Position, to: Position): MoveResult {
-    // Stub implementation - will be implemented during BDD process
+    const piece = this.board.getPieceAt(from);
+    if (!piece) {
+      return {
+        isLegal: false,
+        gameOver: false,
+        reason: 'No piece at source position'
+      };
+    }
+
+    if (piece.color !== this.currentPlayer) {
+      return {
+        isLegal: false,
+        gameOver: false,
+        reason: 'Not your piece'
+      };
+    }
+
+    const isValidMove = piece.isValidMove(this.board, from, to);
+    
     return {
-      isLegal: false,
+      isLegal: isValidMove,
       gameOver: false,
-      reason: 'Not implemented'
+      reason: isValidMove ? undefined : 'Invalid move'
     };
+  }
+
+  getBoard(): ChessBoard {
+    return this.board;
   }
 
   isGameOver(): boolean {
