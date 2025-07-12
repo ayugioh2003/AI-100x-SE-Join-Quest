@@ -23,6 +23,12 @@
       <p class="text-gray-600">
         位置: ({{ selectedPosition.row }}, {{ selectedPosition.col }})
       </p>
+      <div class="mt-2">
+        <p class="text-sm text-gray-500">可移動位置:</p>
+        <div class="text-xs text-gray-400 max-h-20 overflow-y-auto">
+          {{ getValidMovesText() }}
+        </div>
+      </div>
     </div>
 
     <!-- Game Controls -->
@@ -90,5 +96,14 @@ const resetGame = () => {
 
 const clearSelection = () => {
   chessStore.clearSelection()
+}
+
+const getValidMovesText = () => {
+  if (!selectedPosition.value) return ''
+  
+  const validMoves = chessStore.getValidMoves(selectedPosition.value)
+  if (validMoves.length === 0) return '無可移動位置'
+  
+  return validMoves.map(move => `(${move.row},${move.col})`).join(', ')
 }
 </script>

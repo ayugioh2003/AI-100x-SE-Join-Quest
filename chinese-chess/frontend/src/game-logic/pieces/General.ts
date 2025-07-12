@@ -44,20 +44,17 @@ export class General extends Piece {
 
   private isWithinPalace(position: Position): boolean {
     if (this.color === Color.RED) {
-      return position.row >= 1 && position.row <= 3 && 
+      // 紅帥在下方（第8-10排，第4-6列）
+      return position.row >= 8 && position.row <= 10 && 
              position.col >= 4 && position.col <= 6;
     } else {
-      return position.row >= 8 && position.row <= 10 && 
+      // 黑將在上方（第1-3排，第4-6列）
+      return position.row >= 1 && position.row <= 3 && 
              position.col >= 4 && position.col <= 6;
     }
   }
 
   private wouldFaceOpponentGeneral(board: ChessBoard, from: Position, to: Position): boolean {
-    // Temporarily make the move to check
-    const originalPiece = board.getPieceAt(to);
-    board.setPieceAt(to, this);
-    board.setPieceAt(from, null);
-
     // Find opponent general
     const opponentColor = this.color === Color.RED ? Color.BLACK : Color.RED;
     let opponentGeneral: Position | null = null;
@@ -74,28 +71,27 @@ export class General extends Piece {
       if (opponentGeneral) break;
     }
 
-    let wouldFace = false;
+    // Check if moving to 'to' position would result in facing the opponent general
     if (opponentGeneral && to.col === opponentGeneral.col) {
-      // Check if there are no pieces between generals on the same column
+      // Check if there are no pieces between the new position and opponent general
       const startRow = Math.min(to.row, opponentGeneral.row) + 1;
       const endRow = Math.max(to.row, opponentGeneral.row) - 1;
       
       let hasPiecesBetween = false;
       for (let row = startRow; row <= endRow; row++) {
-        if (board.getPieceAt(new Position(row, to.col))) {
+        const checkPos = new Position(row, to.col);
+        const piece = board.getPieceAt(checkPos);
+        // Don't count the piece at 'from' position since it will move
+        if (piece && !checkPos.equals(from)) {
           hasPiecesBetween = true;
           break;
         }
       }
       
-      wouldFace = !hasPiecesBetween;
+      return !hasPiecesBetween;
     }
 
-    // Restore original position
-    board.setPieceAt(from, this);
-    board.setPieceAt(to, originalPiece);
-
-    return wouldFace;
+    return false;
   }
 
 }

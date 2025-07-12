@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { ref, computed } from 'vue'
-import { ChessGame, Color, GameState, Position, type MoveResult } from '../../game-logic'
+import { ChessGame, Position, type MoveResult } from '../../game-logic'
 import type { ChessPiece } from '../../types/chess'
 
 export const useChessStore = defineStore('chess', () => {
