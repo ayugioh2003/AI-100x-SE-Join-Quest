@@ -7,6 +7,8 @@
   },
   "scripts": {
     "test": "cucumber-js",
+    "test:simple": "cucumber-js --tags '@General' --format summary",
+    "test:implemented": "cucumber-js --tags 'not @ignore' --format summary",
     "test:unit": "jest",
     "build": "tsc",
     "clean": "rm -rf dist"

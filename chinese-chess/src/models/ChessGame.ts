@@ -8,7 +8,7 @@ export class ChessGame {
   private board: ChessBoard;
   private currentPlayer: Color = Color.RED;
   private gameState: GameState = GameState.IN_PROGRESS;
-  private moveHistory: Move[] = [];
+  private moveHistory: Move[] = []; // TODO: will be used for move history tracking
 
   constructor() {
     this.board = new ChessBoard();
