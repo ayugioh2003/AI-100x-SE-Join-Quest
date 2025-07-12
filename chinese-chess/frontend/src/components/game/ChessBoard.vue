@@ -73,7 +73,7 @@
             <ChessPiece 
               v-if="getPieceAt(row, col)"
               :piece="getPieceAt(row, col)!"
-              :position="{ row, col }"
+              :position="createPosition(row, col)"
             />
           </div>
         </div>
@@ -105,7 +105,7 @@
             <ChessPiece 
               v-if="getPieceAt(row + 5, col)"
               :piece="getPieceAt(row + 5, col)!"
-              :position="{ row: row + 5, col }"
+              :position="createPosition(row + 5, col)"
             />
           </div>
         </div>
@@ -118,7 +118,7 @@
 import { ref } from 'vue'
 import { useChessStore } from '../../stores/game/chess'
 import ChessPiece from './ChessPiece.vue'
-import type { Position } from '../../types/chess'
+import { Position } from '../../game-logic'
 
 const chessStore = useChessStore()
 const dragOverPosition = ref<Position | null>(null)
@@ -128,13 +128,19 @@ const isSelected = (row: number, col: number): boolean => {
   return selected?.row === row && selected?.col === col
 }
 
-const isValidMove = (_row: number, _col: number): boolean => {
-  // TODO: Implement valid move highlighting
-  return false
+const isValidMove = (row: number, col: number): boolean => {
+  if (!chessStore.selectedPosition) return false
+  
+  const validMoves = chessStore.getValidMoves(chessStore.selectedPosition)
+  return validMoves.some(move => move.row === row && move.col === col)
 }
 
 const getPieceAt = (row: number, col: number) => {
-  return chessStore.getPieceAt({ row, col })
+  return chessStore.getPieceAt(new Position(row, col))
+}
+
+const createPosition = (row: number, col: number) => {
+  return new Position(row, col)
 }
 
 const isDragOver = (row: number, col: number): boolean => {
@@ -144,7 +150,7 @@ const isDragOver = (row: number, col: number): boolean => {
 
 const handleDragOver = (row: number, col: number, event: DragEvent) => {
   event.preventDefault()
-  dragOverPosition.value = { row, col }
+  dragOverPosition.value = new Position(row, col)
   
   if (event.dataTransfer) {
     event.dataTransfer.dropEffect = 'move'
@@ -163,13 +169,11 @@ const handleDrop = (row: number, col: number, event: DragEvent) => {
     try {
       const dragData = JSON.parse(event.dataTransfer.getData('application/json'))
       const from: Position = dragData.from
-      const to: Position = { row, col }
+      const to: Position = new Position(row, col)
       
       // Try to make the move
       const result = chessStore.makeMove(from, to)
-      if (result.isLegal) {
-        chessStore.switchPlayer()
-      }
+      console.log('Move result:', result)
     } catch (error) {
       console.error('Error parsing drag data:', error)
     }
@@ -177,15 +181,13 @@ const handleDrop = (row: number, col: number, event: DragEvent) => {
 }
 
 const handleCellClick = (row: number, col: number) => {
-  const position: Position = { row, col }
+  const position: Position = new Position(row, col)
   const piece = chessStore.getPieceAt(position)
   
   if (chessStore.selectedPosition) {
     // Try to make a move
     const result = chessStore.makeMove(chessStore.selectedPosition, position)
-    if (result.isLegal) {
-      chessStore.switchPlayer()
-    }
+    console.log('Move result:', result)
     chessStore.clearSelection()
   } else if (piece && piece.color === chessStore.currentPlayer) {
     // Select piece if it belongs to current player

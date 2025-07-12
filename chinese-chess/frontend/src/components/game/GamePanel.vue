@@ -56,7 +56,7 @@
 <script setup lang="ts">
 import { computed } from 'vue'
 import { useChessStore } from '../../stores/game/chess'
-import { Color } from '../../types/chess'
+import { Color } from '../../game-logic'
 
 const chessStore = useChessStore()
 
@@ -72,6 +72,11 @@ const currentPlayerText = computed(() => {
 
 const gameStatusText = computed(() => {
   if (chessStore.isGameOver) {
+    const winner = chessStore.getWinner
+    if (winner) {
+      const winnerName = winner === Color.RED ? '紅方' : '黑方'
+      return `遊戲結束 - ${winnerName}獲勝！`
+    }
     return '遊戲結束'
   }
   return '進行中'

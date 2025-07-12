@@ -15,8 +15,8 @@
 
 <script setup lang="ts">
 import { computed, ref } from 'vue'
-import type { ChessPiece, Position } from '../../types/chess'
-import { Color } from '../../types/chess'
+import type { ChessPiece } from '../../types/chess'
+import { Color, Position } from '../../game-logic'
 import { useChessStore } from '../../stores/game/chess'
 
 interface Props {
