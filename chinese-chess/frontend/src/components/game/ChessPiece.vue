@@ -1,16 +1,23 @@
 <template>
   <div 
-    class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border-3 shadow-lg cursor-pointer select-none transform transition-all duration-200 hover:scale-105"
-    :class="pieceClasses"
+    class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border-3 shadow-lg cursor-pointer select-none transform transition-all duration-300 ease-in-out hover:scale-105"
+    :class="[pieceClasses, { 
+      'z-50 scale-110 shadow-2xl': isDragging,
+      'animate-pulse': isCurrentPlayerPiece
+    }]"
+    draggable="true"
+    @dragstart="handleDragStart"
+    @dragend="handleDragEnd"
   >
     {{ pieceSymbol }}
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import type { ChessPiece, Position } from '../../types/chess'
 import { Color } from '../../types/chess'
+import { useChessStore } from '../../stores/game/chess'
 
 interface Props {
   piece: ChessPiece
@@ -18,6 +25,8 @@ interface Props {
 }
 
 const props = defineProps<Props>()
+const chessStore = useChessStore()
+const isDragging = ref(false)
 
 const pieceSymbol = computed(() => {
   const symbols = {
@@ -44,6 +53,10 @@ const pieceSymbol = computed(() => {
   return symbols[props.piece.color][props.piece.type]
 })
 
+const isCurrentPlayerPiece = computed(() => {
+  return props.piece.color === chessStore.currentPlayer
+})
+
 const pieceClasses = computed(() => {
   if (props.piece.color === Color.RED) {
     return 'bg-red-600 text-white border-red-800 shadow-red-300'
@@ -51,4 +64,27 @@ const pieceClasses = computed(() => {
     return 'bg-gray-900 text-white border-gray-700 shadow-gray-500'
   }
 })
+
+const handleDragStart = (event: DragEvent) => {
+  // Only allow dragging if it's the current player's piece
+  if (props.piece.color !== chessStore.currentPlayer) {
+    event.preventDefault()
+    return
+  }
+  
+  isDragging.value = true
+  
+  // Store the source position in the drag data
+  if (event.dataTransfer) {
+    event.dataTransfer.setData('application/json', JSON.stringify({
+      from: props.position,
+      piece: props.piece
+    }))
+    event.dataTransfer.effectAllowed = 'move'
+  }
+}
+
+const handleDragEnd = () => {
+  isDragging.value = false
+}
 </script>

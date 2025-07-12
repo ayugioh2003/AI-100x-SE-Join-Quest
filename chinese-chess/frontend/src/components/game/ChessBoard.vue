@@ -56,14 +56,18 @@
           <div
             v-for="col in 9"
             :key="`${row}-${col}`"
-            class="absolute w-8 h-8 flex items-center justify-center cursor-pointer rounded-full transition-all duration-200"
+            class="absolute w-8 h-8 flex items-center justify-center cursor-pointer rounded-full transition-all duration-300 ease-in-out"
             :class="{
               'bg-yellow-300 bg-opacity-50': isSelected(row, col),
               'bg-green-300 bg-opacity-50': isValidMove(row, col),
-              'hover:bg-gray-200 hover:bg-opacity-30': !isSelected(row, col)
+              'hover:bg-gray-200 hover:bg-opacity-30': !isSelected(row, col),
+              'bg-blue-300 bg-opacity-50': isDragOver(row, col)
             }"
             :style="{ left: `${(col-1) * 48 + 8}px` }"
             @click="handleCellClick(row, col)"
+            @dragover.prevent="handleDragOver(row, col, $event)"
+            @dragleave="handleDragLeave(row, col)"
+            @drop="handleDrop(row, col, $event)"
           >
             <!-- Chess Piece -->
             <ChessPiece 
@@ -84,14 +88,18 @@
           <div
             v-for="col in 9"
             :key="`${row + 5}-${col}`"
-            class="absolute w-8 h-8 flex items-center justify-center cursor-pointer rounded-full transition-all duration-200"
+            class="absolute w-8 h-8 flex items-center justify-center cursor-pointer rounded-full transition-all duration-300 ease-in-out"
             :class="{
               'bg-yellow-300 bg-opacity-50': isSelected(row + 5, col),
               'bg-green-300 bg-opacity-50': isValidMove(row + 5, col),
-              'hover:bg-gray-200 hover:bg-opacity-30': !isSelected(row + 5, col)
+              'hover:bg-gray-200 hover:bg-opacity-30': !isSelected(row + 5, col),
+              'bg-blue-300 bg-opacity-50': isDragOver(row + 5, col)
             }"
             :style="{ left: `${(col-1) * 48 + 8}px` }"
             @click="handleCellClick(row + 5, col)"
+            @dragover.prevent="handleDragOver(row + 5, col, $event)"
+            @dragleave="handleDragLeave(row + 5, col)"
+            @drop="handleDrop(row + 5, col, $event)"
           >
             <!-- Chess Piece -->
             <ChessPiece 
@@ -107,11 +115,13 @@
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue'
 import { useChessStore } from '../../stores/game/chess'
 import ChessPiece from './ChessPiece.vue'
 import type { Position } from '../../types/chess'
 
 const chessStore = useChessStore()
+const dragOverPosition = ref<Position | null>(null)
 
 const isSelected = (row: number, col: number): boolean => {
   const selected = chessStore.selectedPosition
@@ -125,6 +135,45 @@ const isValidMove = (_row: number, _col: number): boolean => {
 
 const getPieceAt = (row: number, col: number) => {
   return chessStore.getPieceAt({ row, col })
+}
+
+const isDragOver = (row: number, col: number): boolean => {
+  const dragPos = dragOverPosition.value
+  return dragPos?.row === row && dragPos?.col === col
+}
+
+const handleDragOver = (row: number, col: number, event: DragEvent) => {
+  event.preventDefault()
+  dragOverPosition.value = { row, col }
+  
+  if (event.dataTransfer) {
+    event.dataTransfer.dropEffect = 'move'
+  }
+}
+
+const handleDragLeave = (_row: number, _col: number) => {
+  dragOverPosition.value = null
+}
+
+const handleDrop = (row: number, col: number, event: DragEvent) => {
+  event.preventDefault()
+  dragOverPosition.value = null
+  
+  if (event.dataTransfer) {
+    try {
+      const dragData = JSON.parse(event.dataTransfer.getData('application/json'))
+      const from: Position = dragData.from
+      const to: Position = { row, col }
+      
+      // Try to make the move
+      const result = chessStore.makeMove(from, to)
+      if (result.isLegal) {
+        chessStore.switchPlayer()
+      }
+    } catch (error) {
+      console.error('Error parsing drag data:', error)
+    }
+  }
 }
 
 const handleCellClick = (row: number, col: number) => {
