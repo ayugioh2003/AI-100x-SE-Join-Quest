@@ -9,6 +9,7 @@ import { Rook } from '../../src/models/pieces/Rook';
 import { Soldier } from '../../src/models/pieces/Soldier';
 import { Horse } from '../../src/models/pieces/Horse';
 import { Cannon } from '../../src/models/pieces/Cannon';
+import { Elephant } from '../../src/models/pieces/Elephant';
 
 const gameService = new ChessGameService();
 let currentGame: any;
@@ -98,6 +99,12 @@ Given('the board has:', function (dataTable: DataTable) {
     } else if (piece === 'Black Cannon') {
       const blackCannon = new Cannon(Color.BLACK, position);
       board.setPieceAt(position, blackCannon);
+    } else if (piece === 'Red Elephant') {
+      const redElephant = new Elephant(Color.RED, position);
+      board.setPieceAt(position, redElephant);
+    } else if (piece === 'Black Elephant') {
+      const blackElephant = new Elephant(Color.BLACK, position);
+      board.setPieceAt(position, blackElephant);
     }
     // Add other piece types as needed
   }
@@ -156,6 +163,38 @@ Given('the board is empty except for a Red Cannon at \\({int}, {int})', function
 });
 
 When('Red moves the Cannon from \\({int}, {int}) to \\({int}, {int})', function (fromRow: number, fromCol: number, toRow: number, toCol: number) {
+  const from = new Position(fromRow, fromCol);
+  const to = new Position(toRow, toCol);
+  moveResult = gameService.makeMove('test-game', from, to);
+});
+
+Given('the board is empty except for a Red Elephant at \\({int}, {int})', function (row: number, col: number) {
+  currentGame = gameService.createGame('test-game');
+  const board = currentGame.getBoard();
+  
+  // Place Red Elephant at specified position
+  const elephantPosition = new Position(row, col);
+  const redElephant = new Elephant(Color.RED, elephantPosition);
+  board.setPieceAt(elephantPosition, redElephant);
+});
+
+When('Red moves the Elephant from \\({int}, {int}) to \\({int}, {int})', function (fromRow: number, fromCol: number, toRow: number, toCol: number) {
+  const from = new Position(fromRow, fromCol);
+  const to = new Position(toRow, toCol);
+  moveResult = gameService.makeMove('test-game', from, to);
+});
+
+Given('the board is empty except for a Red Soldier at \\({int}, {int})', function (row: number, col: number) {
+  currentGame = gameService.createGame('test-game');
+  const board = currentGame.getBoard();
+  
+  // Place Red Soldier at specified position
+  const soldierPosition = new Position(row, col);
+  const redSoldier = new Soldier(Color.RED, soldierPosition);
+  board.setPieceAt(soldierPosition, redSoldier);
+});
+
+When('Red moves the Soldier from \\({int}, {int}) to \\({int}, {int})', function (fromRow: number, fromCol: number, toRow: number, toCol: number) {
   const from = new Position(fromRow, fromCol);
   const to = new Position(toRow, toCol);
   moveResult = gameService.makeMove('test-game', from, to);
