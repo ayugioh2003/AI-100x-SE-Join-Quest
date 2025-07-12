@@ -199,3 +199,15 @@ When('Red moves the Soldier from \\({int}, {int}) to \\({int}, {int})', function
   const to = new Position(toRow, toCol);
   moveResult = gameService.makeMove('test-game', from, to);
 });
+
+Then('Red wins immediately', function () {
+  expect(moveResult.isLegal).to.be.true;
+  expect(moveResult.gameOver).to.be.true;
+  expect(moveResult.winner).to.equal(Color.RED);
+});
+
+Then('the game is not over just from that capture', function () {
+  expect(moveResult.isLegal).to.be.true;
+  expect(moveResult.gameOver).to.be.false;
+  expect(moveResult.winner).to.be.undefined;
+});

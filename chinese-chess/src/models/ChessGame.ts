@@ -34,10 +34,39 @@ export class ChessGame {
 
     const isValidMove = piece.isValidMove(this.board, from, to);
     
+    if (!isValidMove) {
+      return {
+        isLegal: false,
+        gameOver: false,
+        reason: 'Invalid move'
+      };
+    }
+
+    // Check what piece we're capturing
+    const capturedPiece = this.board.getPieceAt(to);
+    
+    // Execute the move
+    this.board.movePiece(from, to);
+    piece.position = to;
+    
+    // Check if we captured the opponent's general (immediate win)
+    let gameOver = false;
+    let winner = undefined;
+    
+    if (capturedPiece && capturedPiece.type === 'GENERAL') {
+      gameOver = true;
+      winner = this.currentPlayer;
+      this.gameState = GameState.CHECKMATE;
+    } else {
+      // Switch player turn only if game continues
+      this.switchPlayer();
+    }
+    
     return {
-      isLegal: isValidMove,
-      gameOver: false,
-      reason: isValidMove ? undefined : 'Invalid move'
+      isLegal: true,
+      gameOver,
+      winner,
+      reason: undefined
     };
   }
 

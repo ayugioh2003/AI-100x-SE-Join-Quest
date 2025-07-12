@@ -177,7 +177,7 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   # 8) WINNING AND LOSING (輸贏)
   #################################################################
-  @Winning @ignore
+  @Winning
   Scenario: Red captures opponent's General and wins immediately (Legal)
     Given the board has:
       | Piece         | Position |
@@ -186,7 +186,7 @@ Feature: Chinese Chess (象棋) Rules
     When Red moves the Rook from (5, 5) to (5, 8)
     Then Red wins immediately
 
-  @Winning @ignore
+  @Winning
   Scenario: Red captures a non-General piece and the game continues (Legal)
     Given the board has:
       | Piece         | Position |
