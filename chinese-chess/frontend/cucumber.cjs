@@ -5,6 +5,7 @@ module.exports = {
     format: ['progress', 'html:cucumber-report.html'],
     formatOptions: {
       snippetInterface: 'async-await'
-    }
+    },
+    tags: 'not @ignore'
   }
 };

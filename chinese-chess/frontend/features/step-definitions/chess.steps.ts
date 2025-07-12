@@ -1,34 +1,35 @@
 import { Given, When, Then, DataTable } from '@cucumber/cucumber';
 import { expect } from 'chai';
-import { ChessGame, ChessBoard, Position, Color } from '../../src/game-logic';
-import { General } from '../../src/game-logic/pieces/General';
-import { Guard } from '../../src/game-logic/pieces/Guard';
-import { Rook } from '../../src/game-logic/pieces/Rook';
-import { Soldier } from '../../src/game-logic/pieces/Soldier';
-import { Horse } from '../../src/game-logic/pieces/Horse';
-import { Cannon } from '../../src/game-logic/pieces/Cannon';
-import { Elephant } from '../../src/game-logic/pieces/Elephant';
+import { ChessGame, Position, Color } from '../../src/game-logic/index.js';
+import { General } from '../../src/game-logic/pieces/General.js';
+import { Guard } from '../../src/game-logic/pieces/Guard.js';
+import { Rook } from '../../src/game-logic/pieces/Rook.js';
+import { Soldier } from '../../src/game-logic/pieces/Soldier.js';
+import { Horse } from '../../src/game-logic/pieces/Horse.js';
+import { Cannon } from '../../src/game-logic/pieces/Cannon.js';
+import { Elephant } from '../../src/game-logic/pieces/Elephant.js';
 
 let currentGame: ChessGame;
 let moveResult: any;
 
 // Helper function to create empty board
-function createEmptyBoard(): ChessBoard {
-  const board = new ChessBoard();
+function createEmptyBoard() {
+  const game = new ChessGame();
+  const board = game.getBoard();
+  
   // Clear all pieces from the board
   for (let row = 1; row <= 10; row++) {
     for (let col = 1; col <= 9; col++) {
       board.setPieceAt(new Position(row, col), null);
     }
   }
-  return board;
+  
+  return { game, board };
 }
 
 Given('the board is empty except for a Red General at \\({int}, {int})', function (row: number, col: number) {
-  currentGame = new ChessGame();
-  // Replace the board with an empty one
-  (currentGame as any).board = createEmptyBoard();
-  const board = currentGame.getBoard();
+  const { game, board } = createEmptyBoard();
+  currentGame = game;
   
   // Place Red General at specified position
   const generalPosition = new Position(row, col);
@@ -57,10 +58,8 @@ Then('the move is illegal', function () {
 });
 
 Given('the board has:', function (dataTable: DataTable) {
-  currentGame = new ChessGame();
-  // Replace the board with an empty one
-  (currentGame as any).board = createEmptyBoard();
-  const board = currentGame.getBoard();
+  const { game, board } = createEmptyBoard();
+  currentGame = game;
   
   const rows = dataTable.hashes();
   for (const row of rows) {
