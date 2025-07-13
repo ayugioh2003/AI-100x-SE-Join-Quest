@@ -39,25 +39,25 @@ export class Guard extends Piece {
 
   private isWithinPalace(position: Position): boolean {
     if (this.color === Color.RED) {
-      // 紅仕只能在九宮格的五個斜角位置
-      const validPositions = [
-        { row: 8, col: 4 },   // 左上
-        { row: 8, col: 6 },   // 右上
-        { row: 9, col: 5 },   // 中間
-        { row: 10, col: 4 },  // 左下
-        { row: 10, col: 6 }   // 右下
-      ];
-      return validPositions.some(pos => 
-        pos.row === position.row && pos.col === position.col
-      );
-    } else {
-      // 黑士只能在九宮格的五個斜角位置
+      // 紅仕只能在九宮格的五個斜角位置 - 根據原始測試定義
       const validPositions = [
         { row: 1, col: 4 },   // 左上
         { row: 1, col: 6 },   // 右上
         { row: 2, col: 5 },   // 中間
         { row: 3, col: 4 },   // 左下
         { row: 3, col: 6 }    // 右下
+      ];
+      return validPositions.some(pos => 
+        pos.row === position.row && pos.col === position.col
+      );
+    } else {
+      // 黑士只能在九宮格的五個斜角位置 - 根據原始測試定義
+      const validPositions = [
+        { row: 8, col: 4 },   // 左上
+        { row: 8, col: 6 },   // 右上
+        { row: 9, col: 5 },   // 中間
+        { row: 10, col: 4 },  // 左下
+        { row: 10, col: 6 }   // 右下
       ];
       return validPositions.some(pos => 
         pos.row === position.row && pos.col === position.col

@@ -44,12 +44,12 @@ export class General extends Piece {
 
   private isWithinPalace(position: Position): boolean {
     if (this.color === Color.RED) {
-      // 紅帥在下方（第8-10排，第4-6列）
-      return position.row >= 8 && position.row <= 10 && 
+      // 紅帥在下方（第1-3排，第4-6列）- 根據原始測試定義
+      return position.row >= 1 && position.row <= 3 && 
              position.col >= 4 && position.col <= 6;
     } else {
-      // 黑將在上方（第1-3排，第4-6列）
-      return position.row >= 1 && position.row <= 3 && 
+      // 黑將在上方（第8-10排，第4-6列）- 根據原始測試定義
+      return position.row >= 8 && position.row <= 10 && 
              position.col >= 4 && position.col <= 6;
     }
   }

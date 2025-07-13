@@ -4,8 +4,8 @@ Feature: Chinese Chess (象棋) Rules
   So that I can play the game correctly
 
   We use (row, col) to indicate positions on a 9×10 board.
-  Row 1 is Red's bottom row; Row 10 is Black's top row.
-  Column 1 is the leftmost column from Red's perspective.
+  Row 1 is Red’s bottom row; Row 10 is Black’s top row.
+  Column 1 is the leftmost column from Red’s perspective.
   
   Each scenario sets up minimal conditions with relevant pieces.
 
@@ -14,23 +14,23 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   @General
   Scenario: Red moves the General within the palace (Legal)
-    Given the board is empty except for a Red General at (9, 5)
-    When Red moves the General from (9, 5) to (9, 4)
+    Given the board is empty except for a Red General at (1, 5)
+    When Red moves the General from (1, 5) to (1, 4)
     Then the move is legal
 
   @General
   Scenario: Red moves the General outside the palace (Illegal)
-    Given the board is empty except for a Red General at (9, 6)
-    When Red moves the General from (9, 6) to (9, 7)
+    Given the board is empty except for a Red General at (1, 6)
+    When Red moves the General from (1, 6) to (1, 7)
     Then the move is illegal
 
   @General
   Scenario: Generals face each other on the same file (Illegal)
     Given the board has:
       | Piece         | Position |
-      | Red General   | (9, 4)   |
-      | Black General | (2, 5)   |
-    When Red moves the General from (9, 4) to (9, 5)
+      | Red General   | (2, 4)   |
+      | Black General | (8, 5)   |
+    When Red moves the General from (2, 4) to (2, 5)
     Then the move is illegal
 
   #################################################################
@@ -38,26 +38,26 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   @Guard
   Scenario: Red moves the Guard diagonally in the palace (Legal)
-    Given the board is empty except for a Red Guard at (8, 4)
-    When Red moves the Guard from (8, 4) to (9, 5)
+    Given the board is empty except for a Red Guard at (1, 4)
+    When Red moves the Guard from (1, 4) to (2, 5)
     Then the move is legal
 
   @Guard
   Scenario: Red moves the Guard straight (Illegal)
-    Given the board is empty except for a Red Guard at (9, 5)
-    When Red moves the Guard from (9, 5) to (9, 6)
+    Given the board is empty except for a Red Guard at (2, 5)
+    When Red moves the Guard from (2, 5) to (2, 6)
     Then the move is illegal
 
   #################################################################
   # 3) ROOK (車)
   #################################################################
-  @Rook @ignore
+  @Rook
   Scenario: Red moves the Rook along a clear rank (Legal)
     Given the board is empty except for a Red Rook at (4, 1)
     When Red moves the Rook from (4, 1) to (4, 9)
     Then the move is legal
 
-  @Rook @ignore
+  @Rook
   Scenario: Red moves the Rook and attempts to jump over a piece (Illegal)
     Given the board has:
       | Piece         | Position |
@@ -69,31 +69,31 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   # 4) HORSE (馬/傌)
   #################################################################
-  @Horse @ignore
-  Scenario: Red moves the Horse in an "L" shape with no block (Legal)
+  @Horse
+  Scenario: Red moves the Horse in an “L” shape with no block (Legal)
     Given the board is empty except for a Red Horse at (3, 3)
     When Red moves the Horse from (3, 3) to (5, 4)
     Then the move is legal
 
-  @Horse @ignore
+  @Horse
   Scenario: Red moves the Horse and it is blocked by an adjacent piece (Illegal)
     Given the board has:
       | Piece        | Position |
       | Red Horse    | (3, 3)   |
-      | Black Rook   | (4, 3)   | # directly adjacent - "leg-block"
+      | Black Rook   | (4, 3)   | # directly adjacent - “leg-block”
     When Red moves the Horse from (3, 3) to (5, 4)
     Then the move is illegal
 
   #################################################################
   # 5) CANNON (炮)
   #################################################################
-  @Cannon @ignore
+  @Cannon
   Scenario: Red moves the Cannon like a Rook with an empty path (Legal)
     Given the board is empty except for a Red Cannon at (6, 2)
     When Red moves the Cannon from (6, 2) to (6, 8)
     Then the move is legal
 
-  @Cannon @ignore
+  @Cannon
   Scenario: Red moves the Cannon and jumps exactly one screen to capture (Legal)
     Given the board has:
       | Piece         | Position |
@@ -103,7 +103,7 @@ Feature: Chinese Chess (象棋) Rules
     When Red moves the Cannon from (6, 2) to (6, 8)
     Then the move is legal
 
-  @Cannon @ignore
+  @Cannon
   Scenario: Red moves the Cannon and tries to jump with zero screens (Illegal)
     Given the board has:
       | Piece         | Position |
@@ -112,7 +112,7 @@ Feature: Chinese Chess (象棋) Rules
     When Red moves the Cannon from (6, 2) to (6, 8)
     Then the move is illegal
 
-  @Cannon @ignore
+  @Cannon
   Scenario: Red moves the Cannon and tries to jump with more than one screen (Illegal)
     Given the board has:
       | Piece         | Position |
@@ -126,19 +126,19 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   # 6) ELEPHANT (相/象)
   #################################################################
-  @Elephant @ignore
+  @Elephant
   Scenario: Red moves the Elephant 2-step diagonal with a clear midpoint (Legal)
     Given the board is empty except for a Red Elephant at (3, 3)
     When Red moves the Elephant from (3, 3) to (5, 5)
     Then the move is legal
 
-  @Elephant @ignore
+  @Elephant
   Scenario: Red moves the Elephant and tries to cross the river (Illegal)
     Given the board is empty except for a Red Elephant at (5, 3)
     When Red moves the Elephant from (5, 3) to (7, 5)
     Then the move is illegal
 
-  @Elephant @ignore
+  @Elephant
   Scenario: Red moves the Elephant and its midpoint is blocked (Illegal)
     Given the board has:
       | Piece         | Position |
@@ -150,25 +150,25 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   # 7) SOLDIER/PAWN (兵/卒)
   #################################################################
-  @Soldier @ignore
+  @Soldier
   Scenario: Red moves the Soldier forward before crossing the river (Legal)
     Given the board is empty except for a Red Soldier at (3, 5)
     When Red moves the Soldier from (3, 5) to (4, 5)
     Then the move is legal
 
-  @Soldier @ignore
+  @Soldier
   Scenario: Red moves the Soldier and tries to move sideways before crossing (Illegal)
     Given the board is empty except for a Red Soldier at (3, 5)
     When Red moves the Soldier from (3, 5) to (3, 4)
     Then the move is illegal
 
-  @Soldier @ignore
+  @Soldier
   Scenario: Red moves the Soldier sideways after crossing the river (Legal)
     Given the board is empty except for a Red Soldier at (6, 5)
     When Red moves the Soldier from (6, 5) to (6, 4)
     Then the move is legal
 
-  @Soldier @ignore
+  @Soldier
   Scenario: Red moves the Soldier and attempts to move backward after crossing (Illegal)
     Given the board is empty except for a Red Soldier at (6, 5)
     When Red moves the Soldier from (6, 5) to (5, 5)
@@ -177,7 +177,7 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   # 8) WINNING AND LOSING (輸贏)
   #################################################################
-  @Winning @ignore
+  @Winning
   Scenario: Red captures opponent's General and wins immediately (Legal)
     Given the board has:
       | Piece         | Position |
@@ -186,7 +186,7 @@ Feature: Chinese Chess (象棋) Rules
     When Red moves the Rook from (5, 5) to (5, 8)
     Then Red wins immediately
 
-  @Winning @ignore
+  @Winning
   Scenario: Red captures a non-General piece and the game continues (Legal)
     Given the board has:
       | Piece         | Position |

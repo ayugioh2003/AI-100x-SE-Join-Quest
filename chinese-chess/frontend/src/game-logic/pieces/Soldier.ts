@@ -31,14 +31,14 @@ export class Soldier extends Piece {
     const hasCrossedRiver = this.hasCrossedRiver(from);
 
     if (!hasCrossedRiver) {
-      // Before crossing river: can only move forward
+      // Before crossing river: can only move forward - 根據原始測試定義
       if (this.color === Color.RED) {
-        return rowDiff === 1 && colDiff === 0; // Red moves up (increasing row)
+        return rowDiff === 1 && colDiff === 0; // Red moves up (increasing row) 紅方在底部向上移動
       } else {
-        return rowDiff === -1 && colDiff === 0; // Black moves down (decreasing row)
+        return rowDiff === -1 && colDiff === 0; // Black moves down (decreasing row) 黑方在頂部向下移動
       }
     } else {
-      // After crossing river: can move forward or sideways, but not backward
+      // After crossing river: can move forward or sideways, but not backward - 根據原始測試定義
       if (this.color === Color.RED) {
         return rowDiff >= 0; // Red cannot move backward (decreasing row)
       } else {

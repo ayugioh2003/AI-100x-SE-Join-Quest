@@ -18,51 +18,51 @@ export class ChessBoard {
   }
 
   private initializeBoard(): void {
-    // Black pieces (top side, rows 1-3)
+    // Red pieces (bottom side, rows 1-3) - 根據原始測試定義 "Row 1 is Red's bottom row"
     // Row 1: Main pieces
-    this.setPieceAt(new Position(1, 1), new Rook(Color.BLACK, new Position(1, 1)));
-    this.setPieceAt(new Position(1, 2), new Horse(Color.BLACK, new Position(1, 2)));
-    this.setPieceAt(new Position(1, 3), new Elephant(Color.BLACK, new Position(1, 3)));
-    this.setPieceAt(new Position(1, 4), new Guard(Color.BLACK, new Position(1, 4)));
-    this.setPieceAt(new Position(1, 5), new General(Color.BLACK, new Position(1, 5)));
-    this.setPieceAt(new Position(1, 6), new Guard(Color.BLACK, new Position(1, 6)));
-    this.setPieceAt(new Position(1, 7), new Elephant(Color.BLACK, new Position(1, 7)));
-    this.setPieceAt(new Position(1, 8), new Horse(Color.BLACK, new Position(1, 8)));
-    this.setPieceAt(new Position(1, 9), new Rook(Color.BLACK, new Position(1, 9)));
+    this.setPieceAt(new Position(1, 1), new Rook(Color.RED, new Position(1, 1)));
+    this.setPieceAt(new Position(1, 2), new Horse(Color.RED, new Position(1, 2)));
+    this.setPieceAt(new Position(1, 3), new Elephant(Color.RED, new Position(1, 3)));
+    this.setPieceAt(new Position(1, 4), new Guard(Color.RED, new Position(1, 4)));
+    this.setPieceAt(new Position(1, 5), new General(Color.RED, new Position(1, 5)));
+    this.setPieceAt(new Position(1, 6), new Guard(Color.RED, new Position(1, 6)));
+    this.setPieceAt(new Position(1, 7), new Elephant(Color.RED, new Position(1, 7)));
+    this.setPieceAt(new Position(1, 8), new Horse(Color.RED, new Position(1, 8)));
+    this.setPieceAt(new Position(1, 9), new Rook(Color.RED, new Position(1, 9)));
 
     // Row 3: Cannons
-    this.setPieceAt(new Position(3, 2), new Cannon(Color.BLACK, new Position(3, 2)));
-    this.setPieceAt(new Position(3, 8), new Cannon(Color.BLACK, new Position(3, 8)));
+    this.setPieceAt(new Position(3, 2), new Cannon(Color.RED, new Position(3, 2)));
+    this.setPieceAt(new Position(3, 8), new Cannon(Color.RED, new Position(3, 8)));
 
     // Row 4: Soldiers
-    this.setPieceAt(new Position(4, 1), new Soldier(Color.BLACK, new Position(4, 1)));
-    this.setPieceAt(new Position(4, 3), new Soldier(Color.BLACK, new Position(4, 3)));
-    this.setPieceAt(new Position(4, 5), new Soldier(Color.BLACK, new Position(4, 5)));
-    this.setPieceAt(new Position(4, 7), new Soldier(Color.BLACK, new Position(4, 7)));
-    this.setPieceAt(new Position(4, 9), new Soldier(Color.BLACK, new Position(4, 9)));
+    this.setPieceAt(new Position(4, 1), new Soldier(Color.RED, new Position(4, 1)));
+    this.setPieceAt(new Position(4, 3), new Soldier(Color.RED, new Position(4, 3)));
+    this.setPieceAt(new Position(4, 5), new Soldier(Color.RED, new Position(4, 5)));
+    this.setPieceAt(new Position(4, 7), new Soldier(Color.RED, new Position(4, 7)));
+    this.setPieceAt(new Position(4, 9), new Soldier(Color.RED, new Position(4, 9)));
 
-    // Red pieces (bottom side, rows 8-10)
+    // Black pieces (top side, rows 8-10) - 根據原始測試定義 "Row 10 is Black's top row"
     // Row 7: Soldiers
-    this.setPieceAt(new Position(7, 1), new Soldier(Color.RED, new Position(7, 1)));
-    this.setPieceAt(new Position(7, 3), new Soldier(Color.RED, new Position(7, 3)));
-    this.setPieceAt(new Position(7, 5), new Soldier(Color.RED, new Position(7, 5)));
-    this.setPieceAt(new Position(7, 7), new Soldier(Color.RED, new Position(7, 7)));
-    this.setPieceAt(new Position(7, 9), new Soldier(Color.RED, new Position(7, 9)));
+    this.setPieceAt(new Position(7, 1), new Soldier(Color.BLACK, new Position(7, 1)));
+    this.setPieceAt(new Position(7, 3), new Soldier(Color.BLACK, new Position(7, 3)));
+    this.setPieceAt(new Position(7, 5), new Soldier(Color.BLACK, new Position(7, 5)));
+    this.setPieceAt(new Position(7, 7), new Soldier(Color.BLACK, new Position(7, 7)));
+    this.setPieceAt(new Position(7, 9), new Soldier(Color.BLACK, new Position(7, 9)));
 
     // Row 8: Cannons
-    this.setPieceAt(new Position(8, 2), new Cannon(Color.RED, new Position(8, 2)));
-    this.setPieceAt(new Position(8, 8), new Cannon(Color.RED, new Position(8, 8)));
+    this.setPieceAt(new Position(8, 2), new Cannon(Color.BLACK, new Position(8, 2)));
+    this.setPieceAt(new Position(8, 8), new Cannon(Color.BLACK, new Position(8, 8)));
 
     // Row 10: Main pieces
-    this.setPieceAt(new Position(10, 1), new Rook(Color.RED, new Position(10, 1)));
-    this.setPieceAt(new Position(10, 2), new Horse(Color.RED, new Position(10, 2)));
-    this.setPieceAt(new Position(10, 3), new Elephant(Color.RED, new Position(10, 3)));
-    this.setPieceAt(new Position(10, 4), new Guard(Color.RED, new Position(10, 4)));
-    this.setPieceAt(new Position(10, 5), new General(Color.RED, new Position(10, 5)));
-    this.setPieceAt(new Position(10, 6), new Guard(Color.RED, new Position(10, 6)));
-    this.setPieceAt(new Position(10, 7), new Elephant(Color.RED, new Position(10, 7)));
-    this.setPieceAt(new Position(10, 8), new Horse(Color.RED, new Position(10, 8)));
-    this.setPieceAt(new Position(10, 9), new Rook(Color.RED, new Position(10, 9)));
+    this.setPieceAt(new Position(10, 1), new Rook(Color.BLACK, new Position(10, 1)));
+    this.setPieceAt(new Position(10, 2), new Horse(Color.BLACK, new Position(10, 2)));
+    this.setPieceAt(new Position(10, 3), new Elephant(Color.BLACK, new Position(10, 3)));
+    this.setPieceAt(new Position(10, 4), new Guard(Color.BLACK, new Position(10, 4)));
+    this.setPieceAt(new Position(10, 5), new General(Color.BLACK, new Position(10, 5)));
+    this.setPieceAt(new Position(10, 6), new Guard(Color.BLACK, new Position(10, 6)));
+    this.setPieceAt(new Position(10, 7), new Elephant(Color.BLACK, new Position(10, 7)));
+    this.setPieceAt(new Position(10, 8), new Horse(Color.BLACK, new Position(10, 8)));
+    this.setPieceAt(new Position(10, 9), new Rook(Color.BLACK, new Position(10, 9)));
   }
 
   getPieceAt(position: Position): Piece | null {

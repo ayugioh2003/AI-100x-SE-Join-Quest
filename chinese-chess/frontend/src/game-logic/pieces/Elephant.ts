@@ -43,10 +43,10 @@ export class Elephant extends Piece {
 
   private isWithinOwnSide(position: Position): boolean {
     if (this.color === Color.RED) {
-      // Red elephant cannot cross row 5 (river is between row 5 and 6)
+      // Red elephant cannot cross row 5 (river is between row 5 and 6) - 根據原始測試定義
       return position.row <= 5;
     } else {
-      // Black elephant cannot cross row 6
+      // Black elephant cannot cross row 5 (must stay in rows 6-10) - 根據原始測試定義
       return position.row >= 6;
     }
   }
