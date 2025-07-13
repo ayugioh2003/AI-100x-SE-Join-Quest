@@ -1,13 +1,13 @@
 import { Given, When, Then, DataTable } from '@cucumber/cucumber';
 import { expect } from 'chai';
-import { ChessGame, Position, Color } from '../../src/game-logic/index.js';
-import { General } from '../../src/game-logic/pieces/General.js';
-import { Guard } from '../../src/game-logic/pieces/Guard.js';
-import { Rook } from '../../src/game-logic/pieces/Rook.js';
-import { Soldier } from '../../src/game-logic/pieces/Soldier.js';
-import { Horse } from '../../src/game-logic/pieces/Horse.js';
-import { Cannon } from '../../src/game-logic/pieces/Cannon.js';
-import { Elephant } from '../../src/game-logic/pieces/Elephant.js';
+import { ChessGame, Position, Color } from '../../src/game-logic/index';
+import { General } from '../../src/game-logic/pieces/General';
+import { Guard } from '../../src/game-logic/pieces/Guard';
+import { Rook } from '../../src/game-logic/pieces/Rook';
+import { Horse } from '../../src/game-logic/pieces/Horse';
+import { Cannon } from '../../src/game-logic/pieces/Cannon';
+import { Elephant } from '../../src/game-logic/pieces/Elephant';
+import { Soldier } from '../../src/game-logic/pieces/Soldier';
 
 let currentGame: ChessGame;
 let moveResult: any;
@@ -122,9 +122,8 @@ Given('the board has:', function (dataTable: DataTable) {
 });
 
 Given('the board is empty except for a Red Guard at \\({int}, {int})', function (row: number, col: number) {
-  currentGame = new ChessGame();
-  (currentGame as any).board = createEmptyBoard();
-  const board = currentGame.getBoard();
+  const { game, board } = createEmptyBoard();
+  currentGame = game;
   
   const guardPosition = new Position(row, col);
   const redGuard = new Guard(Color.RED, guardPosition);
@@ -132,9 +131,8 @@ Given('the board is empty except for a Red Guard at \\({int}, {int})', function 
 });
 
 Given('the board is empty except for a Red Rook at \\({int}, {int})', function (row: number, col: number) {
-  currentGame = new ChessGame();
-  (currentGame as any).board = createEmptyBoard();
-  const board = currentGame.getBoard();
+  const { game, board } = createEmptyBoard();
+  currentGame = game;
   
   const rookPosition = new Position(row, col);
   const redRook = new Rook(Color.RED, rookPosition);
@@ -148,9 +146,8 @@ When('Red moves the Rook from \\({int}, {int}) to \\({int}, {int})', function (f
 });
 
 Given('the board is empty except for a Red Horse at \\({int}, {int})', function (row: number, col: number) {
-  currentGame = new ChessGame();
-  (currentGame as any).board = createEmptyBoard();
-  const board = currentGame.getBoard();
+  const { game, board } = createEmptyBoard();
+  currentGame = game;
   
   const horsePosition = new Position(row, col);
   const redHorse = new Horse(Color.RED, horsePosition);
@@ -164,9 +161,8 @@ When('Red moves the Horse from \\({int}, {int}) to \\({int}, {int})', function (
 });
 
 Given('the board is empty except for a Red Cannon at \\({int}, {int})', function (row: number, col: number) {
-  currentGame = new ChessGame();
-  (currentGame as any).board = createEmptyBoard();
-  const board = currentGame.getBoard();
+  const { game, board } = createEmptyBoard();
+  currentGame = game;
   
   const cannonPosition = new Position(row, col);
   const redCannon = new Cannon(Color.RED, cannonPosition);
@@ -180,9 +176,8 @@ When('Red moves the Cannon from \\({int}, {int}) to \\({int}, {int})', function 
 });
 
 Given('the board is empty except for a Red Elephant at \\({int}, {int})', function (row: number, col: number) {
-  currentGame = new ChessGame();
-  (currentGame as any).board = createEmptyBoard();
-  const board = currentGame.getBoard();
+  const { game, board } = createEmptyBoard();
+  currentGame = game;
   
   const elephantPosition = new Position(row, col);
   const redElephant = new Elephant(Color.RED, elephantPosition);
@@ -196,9 +191,8 @@ When('Red moves the Elephant from \\({int}, {int}) to \\({int}, {int})', functio
 });
 
 Given('the board is empty except for a Red Soldier at \\({int}, {int})', function (row: number, col: number) {
-  currentGame = new ChessGame();
-  (currentGame as any).board = createEmptyBoard();
-  const board = currentGame.getBoard();
+  const { game, board } = createEmptyBoard();
+  currentGame = game;
   
   const soldierPosition = new Position(row, col);
   const redSoldier = new Soldier(Color.RED, soldierPosition);

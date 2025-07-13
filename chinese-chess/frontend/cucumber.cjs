@@ -1,7 +1,8 @@
 module.exports = {
   default: {
     paths: ['features/**/*.feature'],
-    import: ['features/step-definitions/**/*.js'],
+    require: ['features/step-definitions/**/*.ts'],
+    requireModule: ['ts-node/register'],
     format: ['progress', 'html:cucumber-report.html'],
     formatOptions: {
       snippetInterface: 'async-await'
