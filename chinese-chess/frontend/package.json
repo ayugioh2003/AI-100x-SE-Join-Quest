@@ -9,7 +9,7 @@
     "preview": "vite preview",
     "build-only": "vite build",
     "type-check": "vue-tsc --build",
-    "test": "cucumber-js --config cucumber.cjs",
+    "test": "node test-bdd.mjs",
     "test:verbose": "cucumber-js --config cucumber.cjs --format=progress --format=@cucumber/pretty-formatter",
     "test:simple": "node --loader ts-node/esm test-simple.mts"
   },

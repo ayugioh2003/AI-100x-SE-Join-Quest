@@ -36,16 +36,16 @@ Feature: Chinese Chess (象棋) Rules
   #################################################################
   # 2) GUARD (士/仕)
   #################################################################
-  @Guard @ignore
+  @Guard
   Scenario: Red moves the Guard diagonally in the palace (Legal)
-    Given the board is empty except for a Red Guard at (1, 4)
-    When Red moves the Guard from (1, 4) to (2, 5)
+    Given the board is empty except for a Red Guard at (8, 4)
+    When Red moves the Guard from (8, 4) to (9, 5)
     Then the move is legal
 
-  @Guard @ignore
+  @Guard
   Scenario: Red moves the Guard straight (Illegal)
-    Given the board is empty except for a Red Guard at (2, 5)
-    When Red moves the Guard from (2, 5) to (2, 6)
+    Given the board is empty except for a Red Guard at (9, 5)
+    When Red moves the Guard from (9, 5) to (9, 6)
     Then the move is illegal
 
   #################################################################
