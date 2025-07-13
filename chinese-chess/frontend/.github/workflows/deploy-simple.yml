@@ -1,0 +1,48 @@
+name: Deploy to GitHub Pages (Simple)
+
+on:
+  push:
+    branches: [ main, feature/chinese-chess ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '22'
+
+    - name: Cache dependencies
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: ${{ runner.os }}-node-${{ hashFiles('chinese-chess/frontend/package-lock.json') }}
+        restore-keys: |
+          ${{ runner.os }}-node-
+
+    - name: Install dependencies
+      working-directory: ./chinese-chess/frontend
+      run: npm ci
+
+    - name: Run tests
+      working-directory: ./chinese-chess/frontend
+      run: npm test
+
+    - name: Build
+      working-directory: ./chinese-chess/frontend
+      run: npm run build
+
+    - name: Deploy to GitHub Pages
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./chinese-chess/frontend/dist
+        publish_branch: gh-pages
+        force_orphan: true
