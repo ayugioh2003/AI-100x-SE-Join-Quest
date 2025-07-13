@@ -1,33 +1,108 @@
-# frontend
+# 中國象棋 Web 應用程式
 
-This template should help get you started developing with Vue 3 in Vite.
+一個使用 BDD 開發流程建立的純前端中國象棋遊戲。
 
-## Recommended IDE Setup
+## 功能特色
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+- ✅ 完整的中國象棋規則實現
+- ✅ 22 個 BDD 測試場景，66 個測試步驟全部通過
+- ✅ 響應式棋盤設計
+- ✅ 拖放和點擊移動支持
+- ✅ 音效系統（移動、吃子、勝利音效）
+- ✅ 視覺反饋（選中、有效移動、上次移動高亮）
+- ✅ 遊戲狀態顯示
+- ✅ 音效開關控制
 
-## Type Support for `.vue` Imports in TS
+## 技術架構
 
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
+- **前端框架**: Vue 3 + TypeScript
+- **構建工具**: Vite
+- **樣式框架**: Tailwind CSS
+- **狀態管理**: Pinia
+- **測試框架**: Cucumber.js + Chai
+- **開發方法**: 行為驅動開發 (BDD)
 
-## Customize configuration
+## 本地開發
 
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
-```sh
+```bash
+# 安裝依賴
 npm install
-```
 
-### Compile and Hot-Reload for Development
-
-```sh
+# 啟動開發伺服器
 npm run dev
-```
 
-### Type-Check, Compile and Minify for Production
+# 運行 BDD 測試
+npm test
 
-```sh
+# 構建生產版本
 npm run build
 ```
+
+## BDD 測試涵蓋範圍
+
+所有 22 個測試場景包括：
+
+### 將帥 (General)
+- 九宮內移動
+- 不能移出九宮
+- 將帥對面檢查
+
+### 士 (Guard)
+- 斜向移動
+- 九宮內限制
+
+### 車 (Rook)
+- 直線移動
+- 路徑阻擋檢查
+
+### 馬 (Horse)
+- 「日」字移動
+- 蹩馬腿檢查
+
+### 炮 (Cannon)
+- 直線移動
+- 跳躍吃子
+
+### 相/象 (Elephant)
+- 「田」字移動
+- 不能過河
+- 塞象眼檢查
+
+### 兵/卒 (Soldier)
+- 過河前後移動規則
+- 方向限制
+
+### 遊戲邏輯
+- 勝負判定
+- 回合制切換
+
+## 座標系統
+
+遊戲使用標準中國象棋座標系統：
+- Row 1-3: 紅方區域（底部）
+- Row 4-5: 紅方河界
+- Row 6-7: 黑方河界  
+- Row 8-10: 黑方區域（頂部）
+- Col 1-9: 從左到右
+
+## 部署
+
+應用程式配置為自動部署到 GitHub Pages。推送到 `main` 分支時會自動觸發構建和部署流程。
+
+## 項目結構
+
+```
+src/
+├── components/
+│   └── game/           # 遊戲組件
+├── game-logic/         # 象棋邏輯實現
+├── services/           # 服務層（音效等）
+├── stores/             # Pinia 狀態管理
+└── types/              # TypeScript 類型定義
+
+features/               # BDD 測試規格和步驟定義
+```
+
+## 授權
+
+MIT License

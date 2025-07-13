@@ -1,9 +1,10 @@
 <template>
   <div 
-    class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border-3 shadow-lg cursor-pointer select-none transform transition-all duration-300 ease-in-out hover:scale-105"
+    class="w-10 h-10 rounded-full flex items-center justify-center text-lg font-bold border-3 shadow-lg cursor-pointer select-none transform transition-all duration-300 ease-in-out hover:scale-105 hover:shadow-xl active:scale-95"
     :class="[pieceClasses, { 
-      'z-50 scale-110 shadow-2xl': isDragging,
-      'animate-pulse': isCurrentPlayerPiece
+      'z-50 scale-110 shadow-2xl ring-4 ring-opacity-50': isDragging,
+      'animate-pulse': isCurrentPlayerPiece && !isDragging,
+      'hover:shadow-2xl hover:rotate-3': !isDragging
     }]"
     draggable="true"
     @dragstart="handleDragStart"
@@ -59,9 +60,9 @@ const isCurrentPlayerPiece = computed(() => {
 
 const pieceClasses = computed(() => {
   if (props.piece.color === Color.RED) {
-    return 'bg-red-600 text-white border-red-800 shadow-red-300'
+    return 'bg-gradient-to-br from-red-500 to-red-700 text-white border-red-800 shadow-red-300 hover:from-red-400 hover:to-red-600'
   } else {
-    return 'bg-gray-900 text-white border-gray-700 shadow-gray-500'
+    return 'bg-gradient-to-br from-gray-800 to-gray-900 text-white border-gray-700 shadow-gray-500 hover:from-gray-700 hover:to-gray-800'
   }
 })
 

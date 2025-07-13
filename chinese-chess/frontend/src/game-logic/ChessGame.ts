@@ -20,16 +20,20 @@ export class ChessGame {
     if (!piece) {
       return {
         isLegal: false,
+        success: false,
         gameOver: false,
-        reason: 'No piece at source position'
+        reason: 'No piece at source position',
+        captured: false
       };
     }
 
     if (piece.color !== this.currentPlayer) {
       return {
         isLegal: false,
+        success: false,
         gameOver: false,
-        reason: 'Not your piece'
+        reason: 'Not your piece',
+        captured: false
       };
     }
 
@@ -38,8 +42,10 @@ export class ChessGame {
     if (!isValidMove) {
       return {
         isLegal: false,
+        success: false,
         gameOver: false,
-        reason: 'Invalid move'
+        reason: 'Invalid move',
+        captured: false
       };
     }
 
@@ -66,9 +72,11 @@ export class ChessGame {
     
     return {
       isLegal: true,
+      success: true,
       gameOver,
       winner,
-      reason: undefined
+      reason: undefined,
+      captured: capturedPiece !== null
     };
   }
 

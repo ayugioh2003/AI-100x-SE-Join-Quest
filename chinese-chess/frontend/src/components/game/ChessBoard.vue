@@ -58,10 +58,11 @@
             :key="`${row}-${col}`"
             class="absolute w-8 h-8 flex items-center justify-center cursor-pointer rounded-full transition-all duration-300 ease-in-out"
             :class="{
-              'bg-yellow-300 bg-opacity-50': isSelected(row, col),
-              'bg-green-300 bg-opacity-50': isValidMove(row, col),
-              'hover:bg-gray-200 hover:bg-opacity-30': !isSelected(row, col),
-              'bg-blue-300 bg-opacity-50': isDragOver(row, col)
+              'bg-yellow-300 bg-opacity-50 ring-2 ring-yellow-500': isSelected(row, col),
+              'bg-green-300 bg-opacity-50 ring-2 ring-green-500': isValidMove(row, col),
+              'bg-orange-300 bg-opacity-30 ring-1 ring-orange-400': isLastMove(row, col),
+              'hover:bg-gray-200 hover:bg-opacity-30': !isSelected(row, col) && !isValidMove(row, col),
+              'bg-blue-300 bg-opacity-50 ring-2 ring-blue-500': isDragOver(row, col)
             }"
             :style="{ left: `${(col-1) * 48 + 8}px` }"
             @click="handleCellClick(row, col)"
@@ -90,10 +91,11 @@
             :key="`${row + 5}-${col}`"
             class="absolute w-8 h-8 flex items-center justify-center cursor-pointer rounded-full transition-all duration-300 ease-in-out"
             :class="{
-              'bg-yellow-300 bg-opacity-50': isSelected(row + 5, col),
-              'bg-green-300 bg-opacity-50': isValidMove(row + 5, col),
-              'hover:bg-gray-200 hover:bg-opacity-30': !isSelected(row + 5, col),
-              'bg-blue-300 bg-opacity-50': isDragOver(row + 5, col)
+              'bg-yellow-300 bg-opacity-50 ring-2 ring-yellow-500': isSelected(row + 5, col),
+              'bg-green-300 bg-opacity-50 ring-2 ring-green-500': isValidMove(row + 5, col),
+              'bg-orange-300 bg-opacity-30 ring-1 ring-orange-400': isLastMove(row + 5, col),
+              'hover:bg-gray-200 hover:bg-opacity-30': !isSelected(row + 5, col) && !isValidMove(row + 5, col),
+              'bg-blue-300 bg-opacity-50 ring-2 ring-blue-500': isDragOver(row + 5, col)
             }"
             :style="{ left: `${(col-1) * 48 + 8}px` }"
             @click="handleCellClick(row + 5, col)"
@@ -115,13 +117,23 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useChessStore } from '../../stores/game/chess'
 import ChessPiece from './ChessPiece.vue'
 import { Position } from '../../game-logic'
+import { soundService } from '../../services/soundService'
 
 const chessStore = useChessStore()
 const dragOverPosition = ref<Position | null>(null)
+const lastMoveFrom = ref<Position | null>(null)
+const lastMoveTo = ref<Position | null>(null)
+
+onMounted(() => {
+  // 初始化音頻上下文
+  document.addEventListener('click', () => {
+    soundService.resumeAudioContext()
+  }, { once: true })
+})
 
 const isSelected = (row: number, col: number): boolean => {
   const selected = chessStore.selectedPosition
@@ -133,6 +145,11 @@ const isValidMove = (row: number, col: number): boolean => {
   
   const validMoves = chessStore.getValidMoves(chessStore.selectedPosition)
   return validMoves.some(move => move.row === row && move.col === col)
+}
+
+const isLastMove = (row: number, col: number): boolean => {
+  return (lastMoveFrom.value?.row === row && lastMoveFrom.value?.col === col) ||
+         (lastMoveTo.value?.row === row && lastMoveTo.value?.col === col)
 }
 
 const getPieceAt = (row: number, col: number) => {
@@ -173,6 +190,24 @@ const handleDrop = (row: number, col: number, event: DragEvent) => {
       
       // Try to make the move
       const result = chessStore.makeMove(from, to)
+      
+      if (result.success) {
+        lastMoveFrom.value = from
+        lastMoveTo.value = to
+        
+        if (result.captured) {
+          soundService.playCaptureSound()
+        } else {
+          soundService.playMoveSound()
+        }
+        
+        if (result.gameOver) {
+          setTimeout(() => soundService.playWinSound(), 200)
+        }
+      } else {
+        soundService.playInvalidMoveSound()
+      }
+      
       console.log('Move result:', result)
     } catch (error) {
       console.error('Error parsing drag data:', error)
@@ -187,11 +222,30 @@ const handleCellClick = (row: number, col: number) => {
   if (chessStore.selectedPosition) {
     // Try to make a move
     const result = chessStore.makeMove(chessStore.selectedPosition, position)
+    
+    if (result.success) {
+      lastMoveFrom.value = chessStore.selectedPosition
+      lastMoveTo.value = position
+      
+      if (result.captured) {
+        soundService.playCaptureSound()
+      } else {
+        soundService.playMoveSound()
+      }
+      
+      if (result.gameOver) {
+        setTimeout(() => soundService.playWinSound(), 200)
+      }
+    } else {
+      soundService.playInvalidMoveSound()
+    }
+    
     console.log('Move result:', result)
     chessStore.clearSelection()
   } else if (piece && piece.color === chessStore.currentPlayer) {
     // Select piece if it belongs to current player
     chessStore.selectPosition(position)
+    soundService.playSelectSound()
   }
 }
 </script>
