@@ -1,9 +1,15 @@
 <template>
-  <div class="bg-amber-200 p-6 rounded-lg shadow-lg">
+  <div class="bg-amber-200 p-3 sm:p-6 rounded-lg shadow-lg mx-auto max-w-fit">
     <!-- Board Container -->
-    <div class="relative bg-amber-100 border-4 border-amber-800 rounded-lg p-4">
+    <div class="relative bg-amber-100 border-4 border-amber-800 rounded-lg p-2 sm:p-4 mx-auto">
       <!-- Main Board Grid -->
-      <div class="relative bg-amber-100" style="width: 432px; height: 528px;">
+      <div class="relative bg-amber-100 mx-auto transform-gpu" 
+           :style="{ 
+             width: '432px', 
+             height: '528px',
+             transform: isMobile ? 'scale(0.75)' : 'scale(1)',
+             transformOrigin: 'center'
+           }">
         <!-- Board Lines -->
         <svg class="absolute inset-0 w-full h-full" viewBox="0 0 432 528">
           <!-- Horizontal Lines (10 lines total) -->
@@ -117,7 +123,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, onUnmounted, computed } from 'vue'
 import { useChessStore } from '../../stores/game/chess'
 import ChessPiece from './ChessPiece.vue'
 import { Position } from '../../game-logic'
@@ -127,12 +133,27 @@ const chessStore = useChessStore()
 const dragOverPosition = ref<Position | null>(null)
 const lastMoveFrom = ref<Position | null>(null)
 const lastMoveTo = ref<Position | null>(null)
+const windowWidth = ref(window.innerWidth)
+
+const isMobile = computed(() => windowWidth.value < 640)
+
+const handleResize = () => {
+  windowWidth.value = window.innerWidth
+}
 
 onMounted(() => {
   // 初始化音頻上下文
   document.addEventListener('click', () => {
     soundService.resumeAudioContext()
   }, { once: true })
+  
+  // 監聽螢幕大小變化
+  window.addEventListener('resize', handleResize)
+})
+
+onUnmounted(() => {
+  // 清理事件監聽器
+  window.removeEventListener('resize', handleResize)
 })
 
 const isSelected = (row: number, col: number): boolean => {

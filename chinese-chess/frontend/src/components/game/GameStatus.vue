@@ -3,7 +3,7 @@
     <div class="flex items-center justify-between">
       <!-- Current Player -->
       <div class="flex items-center gap-3">
-        <span class="text-lg font-medium text-gray-700">當前回合:</span>
+        <span class="text-lg font-medium text-gray-900">當前回合:</span>
         <div 
           class="flex items-center gap-2 px-3 py-2 rounded-full border-2"
           :class="currentPlayerClasses"
@@ -12,15 +12,15 @@
             class="w-4 h-4 rounded-full"
             :class="currentPlayerColor"
           ></div>
-          <span class="font-bold">{{ currentPlayerName }}</span>
+          <span class="font-bold" :class="currentPlayerTextColor">{{ currentPlayerName }}</span>
         </div>
       </div>
       
       <!-- Game Status -->
       <div class="flex items-center gap-4">
         <div v-if="chessStore.isGameOver" class="text-center">
-          <div class="text-lg font-bold text-green-600">遊戲結束</div>
-          <div class="text-sm text-gray-600">{{ winnerMessage }}</div>
+          <div class="text-lg font-bold text-green-700">遊戲結束</div>
+          <div class="text-sm text-gray-800 font-medium">{{ winnerMessage }}</div>
         </div>
         
         <!-- History Toggle -->
@@ -61,8 +61,8 @@
     
     <!-- Move History (optional) -->
     <div v-if="showMoveHistory" class="mt-4 pt-4 border-t border-gray-200">
-      <div class="text-sm font-medium text-gray-700 mb-2">移動記錄:</div>
-      <div class="text-sm text-gray-600">
+      <div class="text-sm font-semibold text-gray-900 mb-2">移動記錄:</div>
+      <div class="text-sm text-gray-800 font-medium">
         <!-- TODO: Implement move history display -->
         暫未實作移動記錄
       </div>
@@ -87,17 +87,25 @@ const currentPlayerName = computed(() => {
 
 const currentPlayerClasses = computed(() => {
   if (chessStore.currentPlayer === Color.RED) {
-    return 'border-red-500 bg-red-50'
+    return 'border-red-600 bg-red-100'
   } else {
-    return 'border-gray-700 bg-gray-50'
+    return 'border-gray-800 bg-gray-100'
+  }
+})
+
+const currentPlayerTextColor = computed(() => {
+  if (chessStore.currentPlayer === Color.RED) {
+    return 'text-red-800'
+  } else {
+    return 'text-gray-900'
   }
 })
 
 const currentPlayerColor = computed(() => {
   if (chessStore.currentPlayer === Color.RED) {
-    return 'bg-red-500'
+    return 'bg-red-600'
   } else {
-    return 'bg-gray-700'
+    return 'bg-gray-800'
   }
 })
 
