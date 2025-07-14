@@ -7,12 +7,13 @@ AI-100x-SE-Join-Quest/
 ├── README.md                    # 主專案說明
 ├── .gitignore                   # Git 忽略規則
 ├── note.md                      # 專案結構說明
-├── chicken-pecking-rice.svg     # 小雞啄米圖
-├── todo-app-wireframe.svg       # Todo App 線框圖
 ├── order-discount-module/       # 訂單折扣模組
 │   ├── package.json            # 依賴管理
 │   ├── tsconfig.json           # TypeScript 配置
 │   ├── cucumber.js             # Cucumber 配置
+│   ├── cucumber-report.html    # Cucumber 測試報告
+│   ├── cucumber-report.json    # Cucumber 測試報告 JSON
+│   ├── show-cucumber-report.js # 報告顯示工具
 │   ├── src/                    # 源代碼
 │   │   ├── Product.ts
 │   │   ├── OrderItem.ts
@@ -22,15 +23,24 @@ AI-100x-SE-Join-Quest/
 │   │   ├── order.feature
 │   │   ├── double-eleven.feature
 │   │   ├── step-definitions/   # 步驟定義
+│   │   │   ├── order.steps.ts
+│   │   │   └── double-eleven.steps.ts
 │   │   └── support/           # 測試支援文件
+│   │       └── world.ts
 │   └── docs/                  # 設計文檔
 │       ├── BDD.prompt
 │       ├── ERD.png
-│       └── OOD.png
+│       ├── OOD.png
+│       ├── OCP-Refactor.prompt
+│       ├── example.feature
+│       └── ooad.asta
 ├── chinese-chess/              # 中國象棋模組
 │   ├── package.json           # 依賴管理
 │   ├── tsconfig.json          # TypeScript 配置
 │   ├── cucumber.js            # Cucumber 配置
+│   ├── jest.config.js         # Jest 測試配置
+│   ├── todo.md               # 開發任務清單
+│   ├── cucumber-report.html  # Cucumber 測試報告
 │   ├── src/                   # 後端源代碼
 │   │   ├── ChessGameService.ts
 │   │   └── models/           # 遊戲模型
@@ -43,14 +53,24 @@ AI-100x-SE-Join-Quest/
 │   │       └── pieces/       # 棋子類別
 │   ├── frontend/             # Vue.js 前端
 │   │   ├── package.json
+│   │   ├── vite.config.ts    # Vite 配置
+│   │   ├── DEPLOYMENT.md     # 部署說明
+│   │   ├── cucumber-report.html # 前端測試報告
+│   │   ├── dist/            # 構建產物
+│   │   ├── public/          # 靜態資源
 │   │   ├── src/
 │   │   │   ├── App.vue
+│   │   │   ├── main.ts
 │   │   │   ├── components/   # Vue 組件
+│   │   │   │   └── game/    # 遊戲相關組件
 │   │   │   ├── game-logic/   # 遊戲邏輯
 │   │   │   ├── stores/       # Pinia 狀態管理
+│   │   │   ├── services/     # 服務層
+│   │   │   ├── types/        # TypeScript 類型定義
+│   │   │   ├── router/       # 路由配置
 │   │   │   └── views/        # 頁面視圖
-│   │   └── dist/            # 構建產物
-│   ├── features/            # BDD 特徵文件
+│   │   └── features/        # 前端 BDD 測試
+│   ├── features/            # 後端 BDD 特徵文件
 │   │   ├── chess.feature
 │   │   └── step-definitions/ # 步驟定義
 │   └── docs/               # 設計文檔
