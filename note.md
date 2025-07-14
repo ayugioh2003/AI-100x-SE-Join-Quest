@@ -7,6 +7,8 @@ AI-100x-SE-Join-Quest/
 ├── README.md                    # 主專案說明
 ├── .gitignore                   # Git 忽略規則
 ├── note.md                      # 專案結構說明
+├── chicken-pecking-rice.svg     # 小雞啄米圖
+├── todo-app-wireframe.svg       # Todo App 線框圖
 ├── order-discount-module/       # 訂單折扣模組
 │   ├── package.json            # 依賴管理
 │   ├── tsconfig.json           # TypeScript 配置
@@ -21,11 +23,44 @@ AI-100x-SE-Join-Quest/
 │   │   ├── double-eleven.feature
 │   │   ├── step-definitions/   # 步驟定義
 │   │   └── support/           # 測試支援文件
-│   └── docss/                 # 設計文檔
+│   └── docs/                  # 設計文檔
 │       ├── BDD.prompt
 │       ├── ERD.png
 │       └── OOD.png
-└── (future modules)            # 未來的其他系統模組
+├── chinese-chess/              # 中國象棋模組
+│   ├── package.json           # 依賴管理
+│   ├── tsconfig.json          # TypeScript 配置
+│   ├── cucumber.js            # Cucumber 配置
+│   ├── src/                   # 後端源代碼
+│   │   ├── ChessGameService.ts
+│   │   └── models/           # 遊戲模型
+│   │       ├── ChessBoard.ts
+│   │       ├── ChessGame.ts
+│   │       ├── Move.ts
+│   │       ├── MoveResult.ts
+│   │       ├── Position.ts
+│   │       ├── enums.ts
+│   │       └── pieces/       # 棋子類別
+│   ├── frontend/             # Vue.js 前端
+│   │   ├── package.json
+│   │   ├── src/
+│   │   │   ├── App.vue
+│   │   │   ├── components/   # Vue 組件
+│   │   │   ├── game-logic/   # 遊戲邏輯
+│   │   │   ├── stores/       # Pinia 狀態管理
+│   │   │   └── views/        # 頁面視圖
+│   │   └── dist/            # 構建產物
+│   ├── features/            # BDD 特徵文件
+│   │   ├── chess.feature
+│   │   └── step-definitions/ # 步驟定義
+│   └── docs/               # 設計文檔
+│       ├── BDD.prompt
+│       ├── ClassDiagram.md
+│       ├── ERD.md
+│       └── chess.feature
+└── .github/                # GitHub Actions
+    └── workflows/
+        └── deploy.yml      # 部署工作流程
 ```
 
 ## 已完成的模組
@@ -49,13 +84,46 @@ AI-100x-SE-Join-Quest/
 
 **測試結果：** 12 scenarios 全部通過，49 個測試步驟
 
-### 如何運行訂單折扣模組
+### 2. 中國象棋模組 (chinese-chess)
 
+全功能中國象棋遊戲系統，包含完整的前後端實作。
+
+**功能特色：**
+- ✅ 完整的象棋規則實作
+- ✅ 各種棋子的移動邏輯（將、士、象、馬、車、炮、兵）
+- ✅ 遊戲狀態管理（進行中、將軍、將死、和棋）
+- ✅ Vue.js 互動式前端界面
+- ✅ 音效系統
+- ✅ 響應式設計
+
+**技術棧：**
+- 後端：TypeScript, Cucumber.js, Jest
+- 前端：Vue.js 3, TypeScript, Pinia, Vite
+- 測試：BDD (Cucumber), Unit Tests
+- 部署：GitHub Pages
+
+### 如何運行各模組
+
+#### 訂單折扣模組
 ```bash
 cd order-discount-module
 npm install
 npm run test:cucumber          # 運行 BDD 測試
 npm run test:cucumber:details  # 顯示詳細測試報告
+```
+
+#### 中國象棋模組
+```bash
+# 後端測試
+cd chinese-chess
+npm install
+npm run test:cucumber
+
+# 前端開發
+cd chinese-chess/frontend
+npm install
+npm run dev                    # 啟動開發服務器
+npm run build                  # 構建產品版本
 ```
 
 ## 開發指南
@@ -65,5 +133,3 @@ npm run test:cucumber:details  # 顯示詳細測試報告
 1. **Walking Skeleton** - 建立 Cucumber 測試框架
 2. **Red-Green-Refactor** - 逐一實作場景
 3. **Clean Code** - 重構和程式碼品質提升
-
-歡迎貢獻新的系統模組，一起推進 AI × BDD 開發方法論的研究！
